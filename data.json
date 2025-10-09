@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Senior Software Engineer - Full Stack",
+    "content": "We are looking for a Senior Software Engineer to join our dynamic team. You will be responsible for developing and maintaining our web applications using React, Node.js, and Python. The ideal candidate should have 5+ years of experience in full-stack development, strong problem-solving skills, and experience with cloud technologies like AWS or Azure. You will work on exciting projects including microservices architecture, API development, and database optimization. We offer competitive salary, flexible working hours, and comprehensive health benefits.",
+    "url": "https://example.com/jobs/senior-software-engineer-fullstack"
+  },
+  {
+    "title": "Data Scientist - Machine Learning",
+    "content": "Join our data science team to build cutting-edge machine learning models and algorithms. You will work with large datasets, implement predictive models, and collaborate with product teams to drive data-driven decisions. Requirements include PhD or Master's degree in Computer Science/Statistics, proficiency in Python/R, experience with TensorFlow/PyTorch, and strong statistical knowledge. Previous experience in recommendation systems, NLP, or computer vision is a plus. We provide excellent growth opportunities and access to state-of-the-art computing resources.",
+    "url": "https://example.com/jobs/data-scientist-ml"
+  },
+  {
+    "title": "DevOps Engineer - Cloud Infrastructure",
+    "content": "We need a DevOps Engineer to manage our cloud infrastructure and CI/CD pipelines. You will be responsible for automating deployments, monitoring system performance, and ensuring high availability of our services. Key responsibilities include managing Kubernetes clusters, implementing infrastructure as code with Terraform, setting up monitoring with Prometheus/Grafana, and optimizing cloud costs. Ideal candidate has experience with Docker, Kubernetes, AWS/GCP, and strong scripting skills in Python/Bash. We offer remote work options and professional development budget.",
+    "url": "https://example.com/jobs/devops-engineer-cloud"
+  },
+  {
+    "title": "Frontend Developer - React Specialist",
+    "content": "Looking for a passionate Frontend Developer to create beautiful and responsive user interfaces. You will work with React, TypeScript, and modern CSS frameworks to build engaging web applications. Responsibilities include developing reusable components, optimizing application performance, implementing responsive designs, and collaborating with UX/UI designers. Requirements: 3+ years React experience, proficiency in JavaScript/TypeScript, knowledge of state management (Redux/Context), and experience with testing frameworks. Knowledge of Next.js and GraphQL is preferred.",
+    "url": "https://example.com/jobs/frontend-developer-react"
+  },
+  {
+    "title": "Backend Developer - Python/Django",
+    "content": "Join our backend team to build scalable APIs and microservices using Python and Django. You will design database schemas, implement RESTful APIs, optimize query performance, and integrate with third-party services. The role involves working with PostgreSQL, Redis, Celery for background tasks, and deploying applications on AWS. We're looking for someone with strong Python skills, Django framework experience, knowledge of database design, and understanding of software architecture patterns. Experience with FastAPI and containerization is a bonus.",
+    "url": "https://example.com/jobs/backend-developer-python"
+  },
+  {
+    "title": "Product Manager - SaaS Platform",
+    "content": "We're seeking a Product Manager to lead the development of our SaaS platform. You will define product strategy, gather requirements from stakeholders, prioritize features, and work closely with engineering teams. Responsibilities include conducting market research, creating product roadmaps, managing product backlog, and analyzing user feedback. Ideal candidate has 5+ years product management experience, strong analytical skills, experience with Agile methodologies, and knowledge of SaaS business models. MBA or technical background preferred.",
+    "url": "https://example.com/jobs/product-manager-saas"
+  },
+  {
+    "title": "UX/UI Designer - Mobile Apps",
+    "content": "Create exceptional user experiences for our mobile applications. You will design intuitive interfaces, conduct user research, create wireframes and prototypes, and collaborate with developers to ensure pixel-perfect implementation. Responsibilities include user journey mapping, usability testing, creating design systems, and staying updated with mobile design trends. Requirements: 4+ years UX/UI design experience, proficiency in Figma/Sketch, strong portfolio, and understanding of iOS/Android design guidelines. Experience with user research and accessibility is preferred.",
+    "url": "https://example.com/jobs/ux-ui-designer-mobile"
+  },
+  {
+    "title": "Cybersecurity Analyst - Threat Detection",
+    "content": "Protect our organization from cyber threats by monitoring security systems, analyzing security incidents, and implementing security measures. You will conduct vulnerability assessments, investigate security breaches, develop security policies, and provide security training to employees. Key responsibilities include SIEM management, threat hunting, incident response, and compliance reporting. Requirements: Bachelor's degree in Cybersecurity/IT, 3+ years security experience, knowledge of security tools (Splunk, Wireshark), and relevant certifications (CISSP, CEH). Experience with cloud security is a plus.",
+    "url": "https://example.com/jobs/cybersecurity-analyst"
+  },
+  {
+    "title": "Sales Engineer - Technical Solutions",
+    "content": "Bridge the gap between technical capabilities and customer needs as a Sales Engineer. You will work with sales teams to understand customer requirements, demonstrate technical solutions, create proof-of-concepts, and support the sales process. Responsibilities include technical presentations, solution architecture design, customer training, and post-sales support. Ideal candidate has technical background (Computer Science/Engineering), 3+ years sales engineering experience, excellent communication skills, and knowledge of enterprise software. Experience with CRM systems and cloud platforms preferred.",
+    "url": "https://example.com/jobs/sales-engineer-technical"
+  },
+  {
+    "title": "QA Engineer - Automation Testing",
+    "content": "Ensure the quality of our software products through comprehensive testing strategies. You will design and implement automated test suites, perform manual testing, identify bugs, and work with development teams to resolve issues. Responsibilities include test case development, API testing, performance testing, and maintaining test documentation. Requirements: 3+ years QA experience, proficiency in test automation tools (Selenium, Cypress), knowledge of testing methodologies, and experience with CI/CD pipelines. Experience with mobile testing and performance tools is preferred.",
+    "url": "https://example.com/jobs/qa-engineer-automation"
+  },
+  {
+    "title": "Blockchain Developer - Smart Contracts",
+    "content": "Join our blockchain team to develop smart contracts and decentralized applications. You will work with Ethereum, Solidity, Web3.js, and other blockchain technologies to build innovative solutions. Responsibilities include smart contract development, DApp frontend integration, security auditing, and blockchain protocol research. Requirements: 2+ years blockchain development experience, proficiency in Solidity, understanding of DeFi protocols, and knowledge of blockchain security best practices. Experience with Layer 2 solutions and NFT development is a bonus.",
+    "url": "https://example.com/jobs/blockchain-developer-smart-contracts"
+  },
+  {
+    "title": "Technical Writer - Developer Documentation",
+    "content": "Create clear and comprehensive technical documentation for our developer tools and APIs. You will write API documentation, user guides, tutorials, and maintain our developer portal. Responsibilities include collaborating with engineering teams, conducting user interviews, creating code examples, and ensuring documentation accuracy. Requirements: 3+ years technical writing experience, strong technical background, excellent writing skills, and experience with documentation tools (GitBook, Confluence). Knowledge of API documentation standards and developer tools is preferred.",
+    "url": "https://example.com/jobs/technical-writer-documentation"
+  },
+  {
+    "title": "AI/ML Engineer - Computer Vision",
+    "content": "Develop computer vision models and AI solutions for our image processing platform. You will work with deep learning frameworks, implement computer vision algorithms, optimize model performance, and deploy ML models to production. Responsibilities include data preprocessing, model training and validation, performance optimization, and MLOps implementation. Requirements: Master's degree in AI/ML/Computer Science, 3+ years ML experience, proficiency in Python, TensorFlow/PyTorch, and experience with computer vision tasks. Knowledge of cloud ML platforms and model deployment is preferred.",
+    "url": "https://example.com/jobs/ai-ml-engineer-computer-vision"
+  },
+  {
+    "title": "Database Administrator - PostgreSQL",
+    "content": "Manage and optimize our PostgreSQL database infrastructure to ensure high performance and reliability. You will be responsible for database design, performance tuning, backup and recovery, security implementation, and capacity planning. Responsibilities include query optimization, index management, replication setup, and monitoring database health. Requirements: 5+ years DBA experience, expertise in PostgreSQL, knowledge of database security, and experience with cloud databases. Certifications in PostgreSQL and experience with other databases (MySQL, MongoDB) is preferred.",
+    "url": "https://example.com/jobs/database-administrator-postgresql"
+  },
+  {
+    "title": "Marketing Manager - Digital Growth",
+    "content": "Drive digital marketing initiatives to grow our user base and increase brand awareness. You will develop and execute marketing campaigns, manage social media presence, analyze marketing metrics, and coordinate with content and design teams. Responsibilities include SEO/SEM management, email marketing campaigns, social media strategy, and marketing automation. Requirements: 4+ years digital marketing experience, knowledge of marketing tools (HubSpot, Google Analytics), strong analytical skills, and experience with B2B marketing. Experience with growth hacking and conversion optimization is preferred.",
+    "url": "https://example.com/jobs/marketing-manager-digital"
+  }
+]
