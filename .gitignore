@@ -1,0 +1,87 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.hypothesis/
+
+# Type checker / linter caches
+.mypy_cache/
+.pytype/
+.pyre/
+.ruff_cache/
+
+# Logs
+*.log
+logs/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Scrapy
+.scrapy/
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Databases
+*.sqlite3
+*.db
+*.db-journal
+
+# FastAPI / Uvicorn
+*.pid
+
+# Python local packages
+__pypackages__/
+
