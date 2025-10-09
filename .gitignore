@@ -65,7 +65,7 @@ logs/
 .DS_Store
 Thumbs.db
 desktop.ini
-xxxx.txt
+*xxxx.txt
 
 # Scrapy
 .scrapy/
