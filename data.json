@@ -1,77 +1,802 @@
 [
   {
-    "title": "Senior Software Engineer - Full Stack",
-    "content": "We are looking for a Senior Software Engineer to join our dynamic team. You will be responsible for developing and maintaining our web applications using React, Node.js, and Python. The ideal candidate should have 5+ years of experience in full-stack development, strong problem-solving skills, and experience with cloud technologies like AWS or Azure. You will work on exciting projects including microservices architecture, API development, and database optimization. We offer competitive salary, flexible working hours, and comprehensive health benefits.",
-    "url": "https://example.com/jobs/senior-software-engineer-fullstack"
+    "title": "Dumbbells Carbon",
+    "price": 591.3,
+    "currency": "CAD",
+    "url": "https://gamestop.com/product/7810",
+    "image": "https://example.com/images/dumbbells-carbon.jpg",
+    "source": "GameStop"
   },
   {
-    "title": "Data Scientist - Machine Learning",
-    "content": "Join our data science team to build cutting-edge machine learning models and algorithms. You will work with large datasets, implement predictive models, and collaborate with product teams to drive data-driven decisions. Requirements include PhD or Master's degree in Computer Science/Statistics, proficiency in Python/R, experience with TensorFlow/PyTorch, and strong statistical knowledge. Previous experience in recommendation systems, NLP, or computer vision is a plus. We provide excellent growth opportunities and access to state-of-the-art computing resources.",
-    "url": "https://example.com/jobs/data-scientist-ml"
+    "title": "Smart Speaker Deluxe",
+    "price": 437.33,
+    "currency": "EUR",
+    "url": "https://microcenter.com/product/9844",
+    "image": "https://example.com/images/smart-speaker-deluxe.jpg",
+    "source": "Micro Center"
   },
   {
-    "title": "DevOps Engineer - Cloud Infrastructure",
-    "content": "We need a DevOps Engineer to manage our cloud infrastructure and CI/CD pipelines. You will be responsible for automating deployments, monitoring system performance, and ensuring high availability of our services. Key responsibilities include managing Kubernetes clusters, implementing infrastructure as code with Terraform, setting up monitoring with Prometheus/Grafana, and optimizing cloud costs. Ideal candidate has experience with Docker, Kubernetes, AWS/GCP, and strong scripting skills in Python/Bash. We offer remote work options and professional development budget.",
-    "url": "https://example.com/jobs/devops-engineer-cloud"
+    "title": "Nintendo Switch4K",
+    "price": 789.57,
+    "currency": "USD",
+    "url": "https://ebay.com/product/1053",
+    "image": "https://example.com/images/nintendo-switch4k.jpg",
+    "source": "eBay"
   },
   {
-    "title": "Frontend Developer - React Specialist",
-    "content": "Looking for a passionate Frontend Developer to create beautiful and responsive user interfaces. You will work with React, TypeScript, and modern CSS frameworks to build engaging web applications. Responsibilities include developing reusable components, optimizing application performance, implementing responsive designs, and collaborating with UX/UI designers. Requirements: 3+ years React experience, proficiency in JavaScript/TypeScript, knowledge of state management (Redux/Context), and experience with testing frameworks. Knowledge of Next.js and GraphQL is preferred.",
-    "url": "https://example.com/jobs/frontend-developer-react"
+    "title": "Bike Premium",
+    "price": 1180.66,
+    "currency": "USD",
+    "url": "https://ebay.com/product/1404",
+    "image": "https://example.com/images/bike-premium.jpg",
+    "source": "eBay"
   },
   {
-    "title": "Backend Developer - Python/Django",
-    "content": "Join our backend team to build scalable APIs and microservices using Python and Django. You will design database schemas, implement RESTful APIs, optimize query performance, and integrate with third-party services. The role involves working with PostgreSQL, Redis, Celery for background tasks, and deploying applications on AWS. We're looking for someone with strong Python skills, Django framework experience, knowledge of database design, and understanding of software architecture patterns. Experience with FastAPI and containerization is a bonus.",
-    "url": "https://example.com/jobs/backend-developer-python"
+    "title": "Robot Vacuum HEPA",
+    "price": 143.67,
+    "currency": "CAD",
+    "url": "https://newegg.com/product/7791",
+    "image": "https://example.com/images/robot-vacuum-hepa.jpg",
+    "source": "Newegg"
   },
   {
-    "title": "Product Manager - SaaS Platform",
-    "content": "We're seeking a Product Manager to lead the development of our SaaS platform. You will define product strategy, gather requirements from stakeholders, prioritize features, and work closely with engineering teams. Responsibilities include conducting market research, creating product roadmaps, managing product backlog, and analyzing user feedback. Ideal candidate has 5+ years product management experience, strong analytical skills, experience with Agile methodologies, and knowledge of SaaS business models. MBA or technical background preferred.",
-    "url": "https://example.com/jobs/product-manager-saas"
+    "title": "Golf Clubs Professional",
+    "price": 869.14,
+    "currency": "CAD",
+    "url": "https://target.com/product/2493",
+    "image": "https://example.com/images/golf-clubs-professional.jpg",
+    "source": "Target"
   },
   {
-    "title": "UX/UI Designer - Mobile Apps",
-    "content": "Create exceptional user experiences for our mobile applications. You will design intuitive interfaces, conduct user research, create wireframes and prototypes, and collaborate with developers to ensure pixel-perfect implementation. Responsibilities include user journey mapping, usability testing, creating design systems, and staying updated with mobile design trends. Requirements: 4+ years UX/UI design experience, proficiency in Figma/Sketch, strong portfolio, and understanding of iOS/Android design guidelines. Experience with user research and accessibility is preferred.",
-    "url": "https://example.com/jobs/ux-ui-designer-mobile"
+    "title": "LED Strip HEPA",
+    "price": 216.04,
+    "currency": "GBP",
+    "url": "https://costco.com/product/8048",
+    "image": "https://example.com/images/led-strip-hepa.jpg",
+    "source": "Costco"
   },
   {
-    "title": "Cybersecurity Analyst - Threat Detection",
-    "content": "Protect our organization from cyber threats by monitoring security systems, analyzing security incidents, and implementing security measures. You will conduct vulnerability assessments, investigate security breaches, develop security policies, and provide security training to employees. Key responsibilities include SIEM management, threat hunting, incident response, and compliance reporting. Requirements: Bachelor's degree in Cybersecurity/IT, 3+ years security experience, knowledge of security tools (Splunk, Wireshark), and relevant certifications (CISSP, CEH). Experience with cloud security is a plus.",
-    "url": "https://example.com/jobs/cybersecurity-analyst"
+    "title": "AMD Ryzen 5 5600X",
+    "price": 658.03,
+    "currency": "CAD",
+    "url": "https://walmart.com/product/5180",
+    "image": "https://example.com/images/amd-ryzen-5-5600x.jpg",
+    "source": "Walmart"
   },
   {
-    "title": "Sales Engineer - Technical Solutions",
-    "content": "Bridge the gap between technical capabilities and customer needs as a Sales Engineer. You will work with sales teams to understand customer requirements, demonstrate technical solutions, create proof-of-concepts, and support the sales process. Responsibilities include technical presentations, solution architecture design, customer training, and post-sales support. Ideal candidate has technical background (Computer Science/Engineering), 3+ years sales engineering experience, excellent communication skills, and knowledge of enterprise software. Experience with CRM systems and cloud platforms preferred.",
-    "url": "https://example.com/jobs/sales-engineer-technical"
+    "title": "Gaming Mouse 4K",
+    "price": 380.74,
+    "currency": "GBP",
+    "url": "https://amazon.com/product/9555",
+    "image": "https://example.com/images/gaming-mouse-4k.jpg",
+    "source": "Amazon"
   },
   {
-    "title": "QA Engineer - Automation Testing",
-    "content": "Ensure the quality of our software products through comprehensive testing strategies. You will design and implement automated test suites, perform manual testing, identify bugs, and work with development teams to resolve issues. Responsibilities include test case development, API testing, performance testing, and maintaining test documentation. Requirements: 3+ years QA experience, proficiency in test automation tools (Selenium, Cypress), knowledge of testing methodologies, and experience with CI/CD pipelines. Experience with mobile testing and performance tools is preferred.",
-    "url": "https://example.com/jobs/qa-engineer-automation"
+    "title": "Dumbbells Professional",
+    "price": 36.76,
+    "currency": "EUR",
+    "url": "https://bestbuy.com/product/5536",
+    "image": "https://example.com/images/dumbbells-professional.jpg",
+    "source": "Best Buy"
   },
   {
-    "title": "Blockchain Developer - Smart Contracts",
-    "content": "Join our blockchain team to develop smart contracts and decentralized applications. You will work with Ethereum, Solidity, Web3.js, and other blockchain technologies to build innovative solutions. Responsibilities include smart contract development, DApp frontend integration, security auditing, and blockchain protocol research. Requirements: 2+ years blockchain development experience, proficiency in Solidity, understanding of DeFi protocols, and knowledge of blockchain security best practices. Experience with Layer 2 solutions and NFT development is a bonus.",
-    "url": "https://example.com/jobs/blockchain-developer-smart-contracts"
+    "title": "Gucci Sunglasses",
+    "price": 1420.16,
+    "currency": "USD",
+    "url": "https://target.com/product/8927",
+    "image": "https://example.com/images/gucci-sunglasses.jpg",
+    "source": "Target"
   },
   {
-    "title": "Technical Writer - Developer Documentation",
-    "content": "Create clear and comprehensive technical documentation for our developer tools and APIs. You will write API documentation, user guides, tutorials, and maintain our developer portal. Responsibilities include collaborating with engineering teams, conducting user interviews, creating code examples, and ensuring documentation accuracy. Requirements: 3+ years technical writing experience, strong technical background, excellent writing skills, and experience with documentation tools (GitBook, Confluence). Knowledge of API documentation standards and developer tools is preferred.",
-    "url": "https://example.com/jobs/technical-writer-documentation"
+    "title": "Nike Air Sunglasses",
+    "price": 956.36,
+    "currency": "USD",
+    "url": "https://target.com/product/1032",
+    "image": "https://example.com/images/nike-air-sunglasses.jpg",
+    "source": "Target"
   },
   {
-    "title": "AI/ML Engineer - Computer Vision",
-    "content": "Develop computer vision models and AI solutions for our image processing platform. You will work with deep learning frameworks, implement computer vision algorithms, optimize model performance, and deploy ML models to production. Responsibilities include data preprocessing, model training and validation, performance optimization, and MLOps implementation. Requirements: Master's degree in AI/ML/Computer Science, 3+ years ML experience, proficiency in Python, TensorFlow/PyTorch, and experience with computer vision tasks. Knowledge of cloud ML platforms and model deployment is preferred.",
-    "url": "https://example.com/jobs/ai-ml-engineer-computer-vision"
+    "title": "Monitor ",
+    "price": 682.5,
+    "currency": "USD",
+    "url": "https://newegg.com/product/6617",
+    "image": "https://example.com/images/monitor-.jpg",
+    "source": "Newegg"
   },
   {
-    "title": "Database Administrator - PostgreSQL",
-    "content": "Manage and optimize our PostgreSQL database infrastructure to ensure high performance and reliability. You will be responsible for database design, performance tuning, backup and recovery, security implementation, and capacity planning. Responsibilities include query optimization, index management, replication setup, and monitoring database health. Requirements: 5+ years DBA experience, expertise in PostgreSQL, knowledge of database security, and experience with cloud databases. Certifications in PostgreSQL and experience with other databases (MySQL, MongoDB) is preferred.",
-    "url": "https://example.com/jobs/database-administrator-postgresql"
+    "title": "Mechanical Keyboard 4K",
+    "price": 749.75,
+    "currency": "EUR",
+    "url": "https://newegg.com/product/4121",
+    "image": "https://example.com/images/mechanical-keyboard-4k.jpg",
+    "source": "Newegg"
   },
   {
-    "title": "Marketing Manager - Digital Growth",
-    "content": "Drive digital marketing initiatives to grow our user base and increase brand awareness. You will develop and execute marketing campaigns, manage social media presence, analyze marketing metrics, and coordinate with content and design teams. Responsibilities include SEO/SEM management, email marketing campaigns, social media strategy, and marketing automation. Requirements: 4+ years digital marketing experience, knowledge of marketing tools (HubSpot, Google Analytics), strong analytical skills, and experience with B2B marketing. Experience with growth hacking and conversion optimization is preferred.",
-    "url": "https://example.com/jobs/marketing-manager-digital"
+    "title": "Samsung Galaxy Strix G15",
+    "price": 1614.45,
+    "currency": "GBP",
+    "url": "https://amazon.com/product/4840",
+    "image": "https://example.com/images/samsung-galaxy-strix-g15.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "Bike Mountain",
+    "price": 899.42,
+    "currency": "EUR",
+    "url": "https://b&h.com/product/4481",
+    "image": "https://example.com/images/bike-mountain.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Rolex Max",
+    "price": 255.4,
+    "currency": "GBP",
+    "url": "https://amazon.com/product/6949",
+    "image": "https://example.com/images/rolex-max.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "NVIDIA GeForce RTX 5600X",
+    "price": 101.43,
+    "currency": "GBP",
+    "url": "https://b&h.com/product/3958",
+    "image": "https://example.com/images/nvidia-geforce-rtx-5600x.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Ray-Ban Bag",
+    "price": 812.29,
+    "currency": "USD",
+    "url": "https://gamestop.com/product/2966",
+    "image": "https://example.com/images/ray-ban-bag.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "Gucci 501",
+    "price": 596.53,
+    "currency": "GBP",
+    "url": "https://target.com/product/3089",
+    "image": "https://example.com/images/gucci-501.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Yoga Mat Adjustable",
+    "price": 205.7,
+    "currency": "CAD",
+    "url": "https://bestbuy.com/product/9146",
+    "image": "https://example.com/images/yoga-mat-adjustable.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Intel Core i5-Strix G15",
+    "price": 1912.42,
+    "currency": "CAD",
+    "url": "https://newegg.com/product/1732",
+    "image": "https://example.com/images/intel-core-i5-strix-g15.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "ASUS ROG 13",
+    "price": 1331.45,
+    "currency": "CAD",
+    "url": "https://microcenter.com/product/3464",
+    "image": "https://example.com/images/asus-rog-13.jpg",
+    "source": "Micro Center"
+  },
+  {
+    "title": "Dumbbells Premium",
+    "price": 933.6,
+    "currency": "USD",
+    "url": "https://amazon.com/product/6307",
+    "image": "https://example.com/images/dumbbells-premium.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "Rolex Hoodie",
+    "price": 341.4,
+    "currency": "EUR",
+    "url": "https://walmart.com/product/8237",
+    "image": "https://example.com/images/rolex-hoodie.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "LED Strip RGB",
+    "price": 302.76,
+    "currency": "USD",
+    "url": "https://newegg.com/product/4784",
+    "image": "https://example.com/images/led-strip-rgb.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "Supreme 501",
+    "price": 276.08,
+    "currency": "GBP",
+    "url": "https://bestbuy.com/product/5044",
+    "image": "https://example.com/images/supreme-501.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Dell XPS 13",
+    "price": 503.48,
+    "currency": "CAD",
+    "url": "https://costco.com/product/2219",
+    "image": "https://example.com/images/dell-xps-13.jpg",
+    "source": "Costco"
+  },
+  {
+    "title": "Gaming Chair ",
+    "price": 81.16,
+    "currency": "USD",
+    "url": "https://newegg.com/product/5013",
+    "image": "https://example.com/images/gaming-chair-.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "Xbox Series X4K",
+    "price": 460.98,
+    "currency": "USD",
+    "url": "https://walmart.com/product/5509",
+    "image": "https://example.com/images/xbox-series-x4k.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "Monitor RGB",
+    "price": 70.73,
+    "currency": "AUD",
+    "url": "https://ebay.com/product/4967",
+    "image": "https://example.com/images/monitor-rgb.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "Steam Deck4K",
+    "price": 320.95,
+    "currency": "CAD",
+    "url": "https://ebay.com/product/9699",
+    "image": "https://example.com/images/steam-deck4k.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "Coffee Maker Echo",
+    "price": 395.28,
+    "currency": "AUD",
+    "url": "https://target.com/product/5508",
+    "image": "https://example.com/images/coffee-maker-echo.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Nike Air Ultraboost",
+    "price": 492.18,
+    "currency": "USD",
+    "url": "https://target.com/product/6604",
+    "image": "https://example.com/images/nike-air-ultraboost.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Dell XPS 5600X",
+    "price": 1044.51,
+    "currency": "GBP",
+    "url": "https://b&h.com/product/3897",
+    "image": "https://example.com/images/dell-xps-5600x.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "AMD Ryzen 5 S21",
+    "price": 73.77,
+    "currency": "GBP",
+    "url": "https://microcenter.com/product/2643",
+    "image": "https://example.com/images/amd-ryzen-5-s21.jpg",
+    "source": "Micro Center"
+  },
+  {
+    "title": "Gucci Ultraboost",
+    "price": 41.05,
+    "currency": "GBP",
+    "url": "https://bestbuy.com/product/2558",
+    "image": "https://example.com/images/gucci-ultraboost.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Intel Core i5-12400F",
+    "price": 960.99,
+    "currency": "EUR",
+    "url": "https://costco.com/product/8024",
+    "image": "https://example.com/images/intel-core-i5-12400f.jpg",
+    "source": "Costco"
+  },
+  {
+    "title": "NVIDIA GeForce RTX Strix G15",
+    "price": 106.91,
+    "currency": "CAD",
+    "url": "https://costco.com/product/4216",
+    "image": "https://example.com/images/nvidia-geforce-rtx-strix-g15.jpg",
+    "source": "Costco"
+  },
+  {
+    "title": "Gaming Mouse RGB",
+    "price": 404.06,
+    "currency": "USD",
+    "url": "https://b&h.com/product/1847",
+    "image": "https://example.com/images/gaming-mouse-rgb.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Gucci Hoodie",
+    "price": 66.68,
+    "currency": "EUR",
+    "url": "https://b&h.com/product/8191",
+    "image": "https://example.com/images/gucci-hoodie.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Dumbbells Adjustable",
+    "price": 791.72,
+    "currency": "AUD",
+    "url": "https://gamestop.com/product/1974",
+    "image": "https://example.com/images/dumbbells-adjustable.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "Adidas Bag",
+    "price": 238.16,
+    "currency": "CAD",
+    "url": "https://gamestop.com/product/5324",
+    "image": "https://example.com/images/adidas-bag.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "Gaming Chair 4K",
+    "price": 776.77,
+    "currency": "USD",
+    "url": "https://costco.com/product/4866",
+    "image": "https://example.com/images/gaming-chair-4k.jpg",
+    "source": "Costco"
+  },
+  {
+    "title": "Adidas 501",
+    "price": 457.47,
+    "currency": "USD",
+    "url": "https://ebay.com/product/5411",
+    "image": "https://example.com/images/adidas-501.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "ASUS ROG 13",
+    "price": 1246.24,
+    "currency": "CAD",
+    "url": "https://walmart.com/product/9888",
+    "image": "https://example.com/images/asus-rog-13.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "PlayStation 5RGB",
+    "price": 97.87,
+    "currency": "AUD",
+    "url": "https://newegg.com/product/9286",
+    "image": "https://example.com/images/playstation-5rgb.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "Gaming Chair ",
+    "price": 271.77,
+    "currency": "GBP",
+    "url": "https://target.com/product/3157",
+    "image": "https://example.com/images/gaming-chair-.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Dumbbells Official",
+    "price": 193.64,
+    "currency": "EUR",
+    "url": "https://ebay.com/product/6592",
+    "image": "https://example.com/images/dumbbells-official.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "Microwave HEPA",
+    "price": 361.76,
+    "currency": "GBP",
+    "url": "https://bestbuy.com/product/1966",
+    "image": "https://example.com/images/microwave-hepa.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Xbox Series X",
+    "price": 303.94,
+    "currency": "EUR",
+    "url": "https://b&h.com/product/1728",
+    "image": "https://example.com/images/xbox-series-x.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Samsung Galaxy 13",
+    "price": 1076.95,
+    "currency": "USD",
+    "url": "https://gamestop.com/product/6495",
+    "image": "https://example.com/images/samsung-galaxy-13.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "NVIDIA GeForce RTX S21",
+    "price": 288.77,
+    "currency": "USD",
+    "url": "https://microcenter.com/product/5006",
+    "image": "https://example.com/images/nvidia-geforce-rtx-s21.jpg",
+    "source": "Micro Center"
+  },
+  {
+    "title": "Yoga Mat Official",
+    "price": 478.56,
+    "currency": "GBP",
+    "url": "https://b&h.com/product/8931",
+    "image": "https://example.com/images/yoga-mat-official.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Gaming Chair ",
+    "price": 239.96,
+    "currency": "GBP",
+    "url": "https://newegg.com/product/3425",
+    "image": "https://example.com/images/gaming-chair-.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "PlayStation 5Wireless",
+    "price": 545.59,
+    "currency": "CAD",
+    "url": "https://walmart.com/product/1858",
+    "image": "https://example.com/images/playstation-5wireless.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "NVIDIA GeForce RTX 3060",
+    "price": 620.28,
+    "currency": "AUD",
+    "url": "https://amazon.com/product/6467",
+    "image": "https://example.com/images/nvidia-geforce-rtx-3060.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "Mechanical Keyboard ",
+    "price": 129.72,
+    "currency": "EUR",
+    "url": "https://amazon.com/product/9139",
+    "image": "https://example.com/images/mechanical-keyboard-.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "iPhone 13",
+    "price": 1818.39,
+    "currency": "USD",
+    "url": "https://target.com/product/6758",
+    "image": "https://example.com/images/iphone-13.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Nintendo Switch",
+    "price": 62.5,
+    "currency": "USD",
+    "url": "https://amazon.com/product/5019",
+    "image": "https://example.com/images/nintendo-switch.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "Robot Vacuum HEPA",
+    "price": 466.12,
+    "currency": "GBP",
+    "url": "https://microcenter.com/product/9050",
+    "image": "https://example.com/images/robot-vacuum-hepa.jpg",
+    "source": "Micro Center"
+  },
+  {
+    "title": "Smart Speaker Professional",
+    "price": 120.0,
+    "currency": "AUD",
+    "url": "https://bestbuy.com/product/9408",
+    "image": "https://example.com/images/smart-speaker-professional.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Basketball Adjustable",
+    "price": 261.96,
+    "currency": "GBP",
+    "url": "https://amazon.com/product/1321",
+    "image": "https://example.com/images/basketball-adjustable.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "MacBook Pro M2",
+    "price": 741.0,
+    "currency": "CAD",
+    "url": "https://ebay.com/product/8752",
+    "image": "https://example.com/images/macbook-pro-m2.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "Tennis Racket Professional",
+    "price": 951.87,
+    "currency": "EUR",
+    "url": "https://gamestop.com/product/7797",
+    "image": "https://example.com/images/tennis-racket-professional.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "Tennis Racket Electric",
+    "price": 827.08,
+    "currency": "CAD",
+    "url": "https://bestbuy.com/product/7798",
+    "image": "https://example.com/images/tennis-racket-electric.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Adidas Sunglasses",
+    "price": 856.81,
+    "currency": "EUR",
+    "url": "https://walmart.com/product/4681",
+    "image": "https://example.com/images/adidas-sunglasses.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "AMD Ryzen 5 M2",
+    "price": 1673.5,
+    "currency": "GBP",
+    "url": "https://ebay.com/product/5784",
+    "image": "https://example.com/images/amd-ryzen-5-m2.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "Soccer Ball Professional",
+    "price": 275.99,
+    "currency": "CAD",
+    "url": "https://walmart.com/product/1405",
+    "image": "https://example.com/images/soccer-ball-professional.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "Coffee Maker HEPA",
+    "price": 236.48,
+    "currency": "USD",
+    "url": "https://amazon.com/product/1511",
+    "image": "https://example.com/images/coffee-maker-hepa.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "Ray-Ban 501",
+    "price": 1111.89,
+    "currency": "USD",
+    "url": "https://target.com/product/8331",
+    "image": "https://example.com/images/ray-ban-501.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Yoga Mat Mountain",
+    "price": 349.64,
+    "currency": "EUR",
+    "url": "https://b&h.com/product/5721",
+    "image": "https://example.com/images/yoga-mat-mountain.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Steam Deck",
+    "price": 361.05,
+    "currency": "CAD",
+    "url": "https://ebay.com/product/9994",
+    "image": "https://example.com/images/steam-deck.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "Gucci Aviator",
+    "price": 917.91,
+    "currency": "EUR",
+    "url": "https://target.com/product/8337",
+    "image": "https://example.com/images/gucci-aviator.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Supreme Submariner",
+    "price": 139.0,
+    "currency": "USD",
+    "url": "https://costco.com/product/8392",
+    "image": "https://example.com/images/supreme-submariner.jpg",
+    "source": "Costco"
+  },
+  {
+    "title": "Bike Professional",
+    "price": 955.1,
+    "currency": "AUD",
+    "url": "https://gamestop.com/product/5057",
+    "image": "https://example.com/images/bike-professional.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "MacBook Pro M2",
+    "price": 1088.57,
+    "currency": "AUD",
+    "url": "https://gamestop.com/product/4437",
+    "image": "https://example.com/images/macbook-pro-m2.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "Soccer Ball Professional",
+    "price": 534.78,
+    "currency": "EUR",
+    "url": "https://microcenter.com/product/3626",
+    "image": "https://example.com/images/soccer-ball-professional.jpg",
+    "source": "Micro Center"
+  },
+  {
+    "title": "Xbox Series X",
+    "price": 454.71,
+    "currency": "AUD",
+    "url": "https://microcenter.com/product/3669",
+    "image": "https://example.com/images/xbox-series-x.jpg",
+    "source": "Micro Center"
+  },
+  {
+    "title": "Bike Official",
+    "price": 465.56,
+    "currency": "GBP",
+    "url": "https://b&h.com/product/7856",
+    "image": "https://example.com/images/bike-official.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Gaming Mouse RGB",
+    "price": 626.52,
+    "currency": "AUD",
+    "url": "https://b&h.com/product/9546",
+    "image": "https://example.com/images/gaming-mouse-rgb.jpg",
+    "source": "B&H"
+  },
+  {
+    "title": "Basketball Adjustable",
+    "price": 167.36,
+    "currency": "USD",
+    "url": "https://gamestop.com/product/7399",
+    "image": "https://example.com/images/basketball-adjustable.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "Mechanical Keyboard ",
+    "price": 647.9,
+    "currency": "USD",
+    "url": "https://newegg.com/product/3473",
+    "image": "https://example.com/images/mechanical-keyboard-.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "ASUS ROG S21",
+    "price": 1420.53,
+    "currency": "EUR",
+    "url": "https://bestbuy.com/product/9799",
+    "image": "https://example.com/images/asus-rog-s21.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Adidas Ultraboost",
+    "price": 514.04,
+    "currency": "AUD",
+    "url": "https://walmart.com/product/4782",
+    "image": "https://example.com/images/adidas-ultraboost.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "PlayStation 5Pro",
+    "price": 494.5,
+    "currency": "CAD",
+    "url": "https://target.com/product/9922",
+    "image": "https://example.com/images/playstation-5pro.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Robot Vacuum HEPA",
+    "price": 38.6,
+    "currency": "AUD",
+    "url": "https://walmart.com/product/5900",
+    "image": "https://example.com/images/robot-vacuum-hepa.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "Nintendo Switch",
+    "price": 266.76,
+    "currency": "AUD",
+    "url": "https://ebay.com/product/6169",
+    "image": "https://example.com/images/nintendo-switch.jpg",
+    "source": "eBay"
+  },
+  {
+    "title": "Nintendo Switch",
+    "price": 627.09,
+    "currency": "AUD",
+    "url": "https://newegg.com/product/7598",
+    "image": "https://example.com/images/nintendo-switch.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "Smart Speaker Deluxe",
+    "price": 426.81,
+    "currency": "GBP",
+    "url": "https://amazon.com/product/4017",
+    "image": "https://example.com/images/smart-speaker-deluxe.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "Dell XPS 5600X",
+    "price": 577.26,
+    "currency": "GBP",
+    "url": "https://walmart.com/product/4970",
+    "image": "https://example.com/images/dell-xps-5600x.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "AMD Ryzen 5 M2",
+    "price": 564.62,
+    "currency": "CAD",
+    "url": "https://amazon.com/product/5504",
+    "image": "https://example.com/images/amd-ryzen-5-m2.jpg",
+    "source": "Amazon"
+  },
+  {
+    "title": "Adidas 501",
+    "price": 1016.41,
+    "currency": "EUR",
+    "url": "https://gamestop.com/product/3134",
+    "image": "https://example.com/images/adidas-501.jpg",
+    "source": "GameStop"
+  },
+  {
+    "title": "Yoga Mat Carbon",
+    "price": 772.05,
+    "currency": "USD",
+    "url": "https://newegg.com/product/1488",
+    "image": "https://example.com/images/yoga-mat-carbon.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "Supreme Sunglasses",
+    "price": 952.01,
+    "currency": "CAD",
+    "url": "https://walmart.com/product/6115",
+    "image": "https://example.com/images/supreme-sunglasses.jpg",
+    "source": "Walmart"
+  },
+  {
+    "title": "Dumbbells Adjustable",
+    "price": 1095.47,
+    "currency": "AUD",
+    "url": "https://target.com/product/3916",
+    "image": "https://example.com/images/dumbbells-adjustable.jpg",
+    "source": "Target"
+  },
+  {
+    "title": "Treadmill Adjustable",
+    "price": 1020.85,
+    "currency": "CAD",
+    "url": "https://newegg.com/product/5646",
+    "image": "https://example.com/images/treadmill-adjustable.jpg",
+    "source": "Newegg"
+  },
+  {
+    "title": "Microwave Echo",
+    "price": 393.76,
+    "currency": "USD",
+    "url": "https://costco.com/product/5176",
+    "image": "https://example.com/images/microwave-echo.jpg",
+    "source": "Costco"
+  },
+  {
+    "title": "Toaster HEPA",
+    "price": 423.12,
+    "currency": "EUR",
+    "url": "https://bestbuy.com/product/5070",
+    "image": "https://example.com/images/toaster-hepa.jpg",
+    "source": "Best Buy"
+  },
+  {
+    "title": "Smart Speaker Pro",
+    "price": 499.16,
+    "currency": "USD",
+    "url": "https://b&h.com/product/3199",
+    "image": "https://example.com/images/smart-speaker-pro.jpg",
+    "source": "B&H"
   }
 ]

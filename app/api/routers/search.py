@@ -15,7 +15,11 @@ async def search_documents(query: str):
             source = hit['_source']
             results.append({
                 "title": source.get("title"),
+                "price": source.get("price"),
+                "currency": source.get("currency"),
                 "url": source.get("url"),
+                "image": source.get("image"),
+                "source": source.get("source"),
                 "snippet": (source.get("content")[:200] + "..." if source.get("content") else "")
                 })
         return {"results": results}

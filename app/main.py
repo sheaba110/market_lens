@@ -1,6 +1,7 @@
 from fastapi import FastAPI 
 from app.api.routers import search
 
+
 app = FastAPI(title="Offer Explorer")
 
 app.include_router(search.router)
