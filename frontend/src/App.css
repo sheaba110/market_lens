@@ -1,0 +1,57 @@
+.App {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.search-section {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.results-info {
+  margin-top: 1.5rem;
+}
+
+.results-info h5 {
+  color: #495057;
+  font-weight: 500;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid #dee2e6;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-img-top {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.navbar-brand h3 {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .search-section {
+    margin-top: 1rem;
+  }
+  
+  .d-flex.gap-2 {
+    flex-direction: column;
+  }
+  
+  .d-flex.gap-2 .btn {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
