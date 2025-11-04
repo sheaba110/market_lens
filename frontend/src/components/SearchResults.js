@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, Badge, Spinner } from 'react-bootstrap';
 
-const SearchResults = ({ results, loading }) => {
+const SearchResults = ({ results = [], loading = false }) => {
   if (loading) {
     return (
       <div className="text-center py-5">
@@ -12,20 +12,20 @@ const SearchResults = ({ results, loading }) => {
     );
   }
 
-  if (results.length === 0) {
+  if (!results || results.length === 0) {
     return null;
   }
 
   return (
     <Row>
       {results.map((offer, index) => (
-        <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-4">
+        <Col key={offer.id || offer.url || `offer-${index}`} xs={12} sm={6} md={4} lg={3} className="mb-4">
           <Card className="h-100 shadow-sm">
             {offer.image && (
               <Card.Img 
                 variant="top" 
                 src={offer.image} 
-                alt={offer.title}
+                alt={offer.title || 'Offer image'}
                 style={{ 
                   height: '200px', 
                   objectFit: 'cover',
@@ -51,7 +51,7 @@ const SearchResults = ({ results, loading }) => {
                 {offer.price && (
                   <div className="mb-2">
                     <Badge bg="success" className="fs-6">
-                      {offer.currency || '$'}{offer.price.toLocaleString()}
+                      {offer.currency || '$'}{typeof offer.price === 'number' ? offer.price.toLocaleString() : offer.price}
                     </Badge>
                   </div>
                 )}
@@ -84,4 +84,3 @@ const SearchResults = ({ results, loading }) => {
 };
 
 export default SearchResults;
-

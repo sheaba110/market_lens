@@ -26,16 +26,33 @@ function App() {
 
     try {
       const response = await axios.get(`${API_BASE_URL}/search`, {
-        params: { query: query.trim() }
+        params: { query: query.trim() },
+        timeout: 10000, // 10 second timeout
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
       
       setResults(response.data.results || []);
     } catch (err) {
-      setError(
-        err.response?.data?.detail || 
-        err.message || 
-        'Failed to search. Please check if the backend server is running.'
-      );
+      let errorMessage = 'Failed to search. ';
+      
+      if (err.code === 'ECONNABORTED') {
+        errorMessage += 'Request timed out. Please check if the backend server is running at ' + API_BASE_URL;
+      } else if (err.code === 'ERR_NETWORK' || err.message.includes('Network Error')) {
+        errorMessage += `Network error: Cannot connect to backend server at ${API_BASE_URL}. `;
+        errorMessage += 'Please ensure the backend server is running on port 8000.';
+      } else if (err.response) {
+        // Server responded with error status
+        errorMessage += err.response.data?.detail || `Server error: ${err.response.status} ${err.response.statusText}`;
+      } else if (err.request) {
+        // Request made but no response received
+        errorMessage += 'No response from server. Please check if the backend server is running at ' + API_BASE_URL;
+      } else {
+        errorMessage += err.message || 'Unknown error occurred';
+      }
+      
+      setError(errorMessage);
       setResults([]);
     } finally {
       setLoading(false);

@@ -3,30 +3,27 @@ from config import settings
 
 class SearchService:
     def __init__(self):
-        self.es = Elasticsearch(settings.ELASTICSEARCH_URL)
+        # Initialize Elasticsearch connection
+        self.es = Elasticsearch(
+            [settings.ELASTICSEARCH_URL],
+            request_timeout=30
+        )
         self.index_name = settings.SEARCH_INDEX_NAME
-        connection_params = {
-            "hosts": [settings.ELASTICSEARCH_URL]
-        }
-        if settings.ELASTICSEARCH_URL and settings.ELASTICSEARCH_URL:
-            connection_params["basic_auth"] = (
-                settings.ELASTICSEARCH_URL, 
-                
-            )
-            
-        self.es = Elasticsearch(**connection_params)
-        self.index_name = settings.SEARCH_INDEX_NAME
-
         
     def search(self, query: str):
-        search_body = {
+        """
+        Search for documents matching the query in title and source fields.
+        Returns Elasticsearch hits.
+        """
+        search_query = {
             "query": {
-                "multi_match":{
+                "multi_match": {
                     "query": query,
-                    "fields": ["title", "content"]
+                    "fields": ["title", "source"]  # Search in title and source (content doesn't exist in data.json)
                 }
-            }
+            },
+            "size": 50  # Limit results to 50
         }
 
-        res = self.es.search(index=self.index_name, body=search_body)
+        res = self.es.search(index=self.index_name, body=search_query)
         return res['hits']['hits']
