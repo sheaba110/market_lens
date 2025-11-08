@@ -1,4 +1,4 @@
-# Scrapy settings for explorer project
+# Scrapy settings for offer_crawler project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,16 +7,16 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "explorer"
+BOT_NAME = "offer_crawler"
 
-SPIDER_MODULES = ["explorer.spiders"]
-NEWSPIDER_MODULE = "explorer.spiders"
+SPIDER_MODULES = ["offer_crawler.spiders"]
+NEWSPIDER_MODULE = "offer_crawler.spiders"
 
 ADDONS = {}
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "explorer (+http://www.yourdomain.com)"
+#USER_AGENT = "offer_crawler (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -41,13 +41,13 @@ DOWNLOAD_DELAY = 1
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "explorer.middlewares.ExplorerSpiderMiddleware": 543,
+#    "offer_crawler.middlewares.OfferCrawlerSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "explorer.middlewares.ExplorerDownloaderMiddleware": 543,
+#    "offer_crawler.middlewares.OfferCrawlerDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -59,7 +59,7 @@ DOWNLOAD_DELAY = 1
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "explorer.pipelines.ExplorerPipeline": 300,
+#    "offer_crawler.pipelines.OfferCrawlerPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
