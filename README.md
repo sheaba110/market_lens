@@ -34,5 +34,5 @@ uvicorn main:app --reload
 ```
 ### 5. Run the Frontend
 ```bash
-npm run dev
+npm start
 ```
