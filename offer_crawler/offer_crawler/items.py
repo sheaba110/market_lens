@@ -7,14 +7,12 @@ from locale import currency
 import scrapy
 
 
-class OfferCrawlerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    title = scrapy.Field()
+
+class ItemsCrawler(scrapy.Item):
+
     price = scrapy.Field()
-    currency = scrapy.Field()
-    url = scrapy.Field()
+    title = scrapy.Field()
+    url   = scrapy.Field()
     image = scrapy.Field()
     source = scrapy.Field()
-    snippet = scrapy.Field()
-    
+

@@ -36,7 +36,6 @@ async def search_documents(query: str):
             results.append({
                 "title": title or None,
                 "price": source.get("price"),
-                "currency": source.get("currency"),
                 "url": source.get("url"),
                 "image": source.get("image"),
                 "source": source.get("source"),

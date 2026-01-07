@@ -10,7 +10,7 @@ def index_data():
         es.indices.delete(index=index_name)
     es.indices.create(index=index_name)
 
-    with open("data.json", "r") as f:
+    with open("classes.json", "r") as f:
         data = json.load(f)
 
     for doc in data:

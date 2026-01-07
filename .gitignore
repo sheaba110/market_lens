@@ -72,7 +72,7 @@ desktop.ini
 # Environment variables
 .env
 .env.*
-*.env
+*.venv
 
 # Databases
 *.sqlite3
@@ -85,3 +85,4 @@ desktop.ini
 # Python local packages
 __pypackages__/
 
+*.json
