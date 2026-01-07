@@ -1,6 +1,6 @@
-**Offer Explorer**
+**Market Lens**
 
-**Description:** Offer Explorer is a search engine for discovering and comparing offers (scrapes PC component listings and indexes them for search).
+**Description:** Market Lens is a search engine for discovering and comparing offers (scrapes PC component listings and indexes them for search).
 
 **Tech Stack:**
 
@@ -17,6 +17,22 @@
   git clone https://github.com/sheaba110/offer_explorer.git
   cd offer_explorer
   ```
+# Market Lens
+
+## Description 
+Market Lens are a search engine customised to search and filter the results with the best value for costumers (crawl the pc components from pc components's websits)
+
+## Tech Stack </>
+#### Backend: FastAPI/ Elasticsearch/ Scrapy/ beautifulsoup4/ selenium
+#### Frontend: React/ Bootsrap
+
+## Installation
+
+### 1. clone repo
+```bash
+git clone https://github.com/sheaba110/market_lens.git
+cd market_lens
+```
 
 - **Python environment & dependencies:**
 
@@ -49,6 +65,21 @@
 - **Run backend API:**
 
   - Start the FastAPI server from the project root:
+```bash
+python -m venv venv
+pip install -r requirements.txt
+```
+#### or
+```bash
+pip install pipenv
+pipenv shell
+pipenv install
+```
+### 3. Run the search engine
+```bash
+python index_data.py
+```
+### ! if the elasticsearch gived you an error like ``` elastic_transport.ConnectionError: Connection error caused by: ConnectionError(Connection error caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0********>: Failed to establish a new connection: [WinError 10061]))``` * Try to install it manually on your OS
 
   ```bash
   uvicorn app.main:app --reload
@@ -80,11 +111,3 @@
   - Elasticsearch is installed and running locally (default http://localhost:9200), or
   - `ELASTICSEARCH_URL` in your `.venv` file points to a reachable Elasticsearch instance, and
   - The server version is compatible with the client library you have installed.
-
-**Useful files**
-
-- Settings: [config.py](config.py)
-- Indexer: [index_data.py](index_data.py)
-- Backend entrypoint: [app/main.py](app/main.py)
-- Backend search router: [app/api/routers/search.py](app/api/routers/search.py)
-- Scrapy project: `offer_crawler/` (spiders under `offer_crawler/offer_crawler/spiders`)
