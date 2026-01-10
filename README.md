@@ -14,8 +14,8 @@
 - **Clone repository:**
 
   ```bash
-  git clone https://github.com/sheaba110/offer_explorer.git
-  cd offer_explorer
+  git clone <repo-url>
+  cd <repo-name>
   ```
 # Market Lens
 
@@ -79,8 +79,6 @@ pipenv install
 ```bash
 python index_data.py
 ```
-### ! if the elasticsearch gived you an error like ``` elastic_transport.ConnectionError: Connection error caused by: ConnectionError(Connection error caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0********>: Failed to establish a new connection: [WinError 10061]))``` * Try to install it manually on your OS
-
   ```bash
   uvicorn app.main:app --reload
   ```
