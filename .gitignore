@@ -15,7 +15,7 @@ ENV/
 
 # Distribution / packaging
 .Python
-.__init__.py
+.__init__.*
 build/
 develop-eggs/
 dist/
