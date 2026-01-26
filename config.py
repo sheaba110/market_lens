@@ -6,6 +6,6 @@ class Settings(BaseSettings):
     SEARCH_INDEX_NAME: str = "offerexplorer_index"
 
     class Config:
-        env_file = ".venv"
+        env_file = "venv"
 
 settings = Settings()
