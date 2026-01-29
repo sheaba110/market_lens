@@ -7,6 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+# from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+# from scrapy.downloadermiddlewares.retry import RetryMiddleware
+# from offer_crawler.middlewares import OfferCrawlerDownloaderMiddleware
+
 BOT_NAME = "offer_crawler"
 
 SPIDER_MODULES = ["offer_crawler.spiders"]
@@ -34,9 +38,9 @@ DOWNLOAD_DELAY = 1.5
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-   "Accept-Language": "en-US,en;q=0.9,ar;q=0.8",
-   "Referer": "https://www.google.com/",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9,ar;q=0.8",
+    "Referer": "https://www.google.com/",
 }
 
 # Enable or disable spider middlewares
@@ -51,9 +55,7 @@ DOWNLOADER_MIDDLEWARES = {
     "offer_crawler.middlewares.OfferCrawlerDownloaderMiddleware": 543,
     "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None,
     "scrapy.downloadermiddlewares.retry.RetryMiddleware": None,
-    "scrapy_fake_useragent.middleware.RandomUserAgentMiddleware": 400,
-    "scrapy_rotating_proxies.middlewares.RotatingProxyMiddleware": 610,  # أو Middleware الخدمة المدفوعة
-    "scrapy_rotating_proxies.middlewares.BanDetectionMiddleware": 620,
+    # "scrapy_rotating_proxies.middlewares.BanDetectionMiddleware": 620,
 }
 
 # Enable or disable extensions
@@ -66,7 +68,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     "offer_crawler.pipelines.OfferCrawlerPipeline": 300,
-    "offer_crawler.pipelines.SaveToMongoPipeline": 800,
+    # "offer_crawler.pipelines.SaveToMongoPipeline": 800,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

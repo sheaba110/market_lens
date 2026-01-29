@@ -1,0 +1,12 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: market-lens-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: sheaba110
+      MONGO_INITDB_ROOT_PASSWORD: 30204011
+    volumes:
+      - ./mongo_data:/data/db
