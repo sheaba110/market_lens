@@ -3,11 +3,16 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Environment variables
+.env
+*.pyc
+.DS_Store
+mongo_data/
+
 # C extensions
 *.pyd
 
 # Virtual environments
-venv/
 venv/
 env/
 ENV/
@@ -62,17 +67,11 @@ logs/
 *.swo
 
 # OS files
-.DS_Store
 Thumbs.db
 desktop.ini
 
 # Scrapy
 .scrapy/
-
-# Environment variables
-.env
-.env.*
-*.venv
 
 # Databases
 *.sqlite3
@@ -87,3 +86,4 @@ __pypackages__/
 
 *.json
 __init__.py
+

@@ -6,7 +6,7 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: sheaba110
-      MONGO_INITDB_ROOT_PASSWORD: 30204011
+      MONGO_INITDB_ROOT_USERNAME: {MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: {MONGO_PASSWORD}
     volumes:
       - ./mongo_data:/data/db
