@@ -51,7 +51,7 @@ cd market_lens
 
     ```text
     ELASTICSEARCH_URL=http://localhost:9200
-    SEARCH_INDEX_NAME=offerexplorer_index
+    SEARCH_INDEX_NAME=market_lens_index
     ```
 
 - **Index sample data:**
