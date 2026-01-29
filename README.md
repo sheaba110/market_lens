@@ -23,8 +23,9 @@
 Market Lens are a search engine customised to search and filter the results with the best value for costumers (crawl the pc components from pc components's websits)
 
 ## Tech Stack </>
-#### Backend: FastAPI/ Elasticsearch/ Scrapy/ beautifulsoup4/ selenium
+#### Backend: FastAPI/ Elasticsearch/ Scrapy
 #### Frontend: React/ Bootsrap
+#### Database: MongoDB
 
 ## Installation
 
@@ -51,7 +52,7 @@ cd market_lens
 
     ```text
     ELASTICSEARCH_URL=http://localhost:9200
-    SEARCH_INDEX_NAME=offerexplorer_index
+    SEARCH_INDEX_NAME=market_lens_index
     ```
 
 - **Index sample data:**
