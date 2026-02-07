@@ -1,12 +1,43 @@
+version: '3.8'
+
 services:
+  # Service 1: MongoDB
   mongodb:
     image: mongo:latest
-    container_name: market-lens-mongo
-    restart: always
+    container_name: market_mongo
+    restart: unless-stopped
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: {MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: {MONGO_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
-      - ./mongo_data:/data/db
+      - mongo_data:/data/db
+    networks:
+      - market_net
+
+  # Service 2: Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    container_name: market_elastic
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"  # Limit memory to prevent crashes
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks:
+      - market_net
+
+# Define persistent storage (so data survives restarts)
+volumes:
+  mongo_data:
+  es_data:
+
+# Define a custom network (so containers can talk to each other by name)
+networks:
+  market_net:
+    driver: bridge
