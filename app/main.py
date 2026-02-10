@@ -1,6 +1,6 @@
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.routers import search
+from app.api import search
 
 
 app = FastAPI(title="Offer Explorer")

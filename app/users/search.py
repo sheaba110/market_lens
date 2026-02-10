@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException 
-from app.core.services.search_service import SearchService
+from app.products.search_service import SearchService
 
 router = APIRouter()
 search_service = SearchService()
