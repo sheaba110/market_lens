@@ -29,26 +29,27 @@ Market Lens are a search engine customised to search and filter the results with
 
 ## Project Structure
 
-####  app/
-####  ├── main.py                 
-####  ├── config.py               
-####  ├── database.py             
-####  │
-####  ├── users/                 
-####  │   ├── __init__.py
-####  │   ├── models.py       
-####  │   ├── router.py       
-####  │   ├── schemas.py          
-####  │   └── search.py         
-####  │
-####  ├── products/              
-####  │   ├── __init__.py
-####  │   ├── router.py
-####  │   ├── models.py
-####  │   └── schemas.py
-####  │
-####  └── requirements.txt
-
+```bash
+  app/
+  ├── main.py                 
+  ├── config.py               
+  ├── database.py             
+  │
+  ├── users/                 
+  │   ├── __init__.py
+  │   ├── models.py       
+  │   ├── router.py       
+  │   ├── schemas.py          
+  │   └── search.py         
+  │
+  ├── products/              
+  │   ├── __init__.py
+  │   ├── router.py
+  │   ├── models.py
+  │   └── schemas.py
+  │
+  └── requirements.txt
+```
 ## Installation
 
 ### 1. clone repo
