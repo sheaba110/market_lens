@@ -2,21 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Environment variables
-.env
-*.pyc
-.DS_Store
-
-
-# C extensions
+*.so
+.Python
 *.pyd
-
-# Virtual environments
-.venv/
-env/
-ENV/
-.python-version
 
 # Distribution / packaging
 .Python
@@ -37,53 +25,124 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Unit test / coverage reports
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+.env
+.env.local
+.env.*.local
+
+# Django specific
+*.sqlite3
+*.sqlite
+*.db
+*.db-journal
+media/
+mediafiles/
+staticfiles/
+static_root/
+*.log
+logs/
+
+# React / Node.js frontend
+frontend/node_modules/
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/build/
+frontend/dist/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/.DS_Store
+
+# Scrapy
+.scrapy/
+offer_crawler/logs/
+offer_crawler/*.log
+
+# Testing & coverage
+.tox/
+.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 htmlcov/
-.tox/
-.nox/
 .pytest_cache/
 .hypothesis/
-
-# Type checker / linter caches
-.mypy_cache/
 .pytype/
 .pyre/
+
+# Linting & type checking
+.mypy_cache/
 .ruff_cache/
+.pylint.d/
 
-# Logs
-*.log
-logs/
-
-# IDEs and editors
+# IDE & editor configurations
 .vscode/
 .idea/
 *.swp
 *.swo
+*.swn
+*~
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+*.iml
 
-# OS files
+# OS specific files
 Thumbs.db
 desktop.ini
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 
-# Scrapy
-.scrapy/
+# Docker
+docker-compose.override.yml
+.docker/
 
-# Databases
-*.sqlite3
-*.db
-*.db-journal
+# Elasticsearch
+data/elasticsearch/
+elasticsearch/
 
-# FastAPI / Uvicorn
-*.pid
+# Temporary & cache files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+*.pyc
+*.pyo
 
-# Python local packages
-__pypackages__/
+# Credentials & sensitive data
+secrets.json
+*.pem
+*.key
+*.crt
 
-*.json
-__init__.py
+# Project specific
+output.json
+output.csv
+indexed_data/
+temp/
+tmp/
+
+# Build & deployment
+*.tar.gz
+*.zip
+celerybeat-schedule
 
