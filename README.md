@@ -4,7 +4,8 @@
 
 **Tech Stack:**
 
-- **Backend:** FastAPI (0.115.4), Starlette (0.41.3)
+- **Backend:** Django=5.2.11
+
 - **Search / Indexing:** Elasticsearch Python client (9.2.0)
 - **Web scraping / crawling:** Scrapy (2.13.3), lxml (6.0.2)
 - **Frontend:** React (18.2.0), react-scripts (5.0.1), Bootstrap (5.3.8)
@@ -29,26 +30,59 @@ Market Lens are a search engine customised to search and filter the results with
 
 ## Project Structure
 
-```bash
-  app/
-  ├── main.py                 
-  ├── config.py               
-  ├── database.py             
-  │
-  ├── users/                 
-  │   ├── __init__.py
-  │   ├── models.py       
-  │   ├── router.py       
-  │   ├── schemas.py          
-  │   └── search.py         
-  │
-  ├── products/              
-  │   ├── __init__.py
-  │   ├── router.py
-  │   ├── models.py
-  │   └── schemas.py
-  │
-  └── requirements.txt
+```
+MarketLens/
+├── backend/                           # Backend FastAPI application
+│   ├── main.py                    # Main FastAPI application entry point
+│   ├── products/                  # Products module
+│   │   ├── models.py              # Product database models
+│   │   ├── router.py              # Product API routes
+│   │   ├── schemas.py             # Product request/response schemas
+│   │   └── search_service.py      # Product search service
+│   └── users/                     # Users module
+│       ├── models.py              # User database models
+│       ├── router.py              # User API routes
+│       ├── schemas.py             # User request/response schemas
+│       └── search.py              # User search functionality
+│
+├── frontend/                      # React frontend application
+│   ├── public/
+│   │   └── index.html             # Main HTML template
+│   ├── src/
+│   │   ├── App.js                 # Main React component
+│   │   ├── App.css                # Application styles
+│   │   ├── index.js               # React entry point
+│   │   └── components/
+│   │       └── SearchResults.js   # Search results component
+│   ├── package.json               # Node.js dependencies
+│   ├── package-lock.json
+│   ├── README.md
+│   ├── .gitignore
+│   └── node_modules/
+│
+├── offer_crawler/                 # Scrapy web scraping project
+│   ├── scrapy.cfg                 # Scrapy configuration
+│   └── offer_crawler/             # Scrapy application
+│       ├── __init__.py
+│       ├── items.py               # Scrapy item definitions
+│       ├── middlewares.py          # Scrapy middlewares
+│       ├── pipelines.py            # Scrapy data pipelines
+│       ├── settings.py             # Scrapy settings
+│       └── spiders/                # Web scraper spiders
+│           ├── __init__.py
+│           ├── badrgrb.py          # Badrgrb shop spider
+│           └── sigma.py            # Sigma shop spider   
+│       
+│       
+│
+├── config.py                      # Application configuration
+├── index_data.py                  # Script to index data in Elasticsearch
+├── requirements.txt               # Python dependencies
+├── docker-compose.yaml            # Docker compose configuration
+├── .env.example                   # Example environment variables
+├── .gitignore                     # Git ignore rules
+├── README.md                      # Project documentation
+└── __pycache__/
 ```
 ## Installation
 
@@ -88,7 +122,7 @@ cd market_lens
 
 - **Run backend API:**
 
-  - Start the FastAPI server from the project root:
+  - Start the Django server from the project root:
 ```bash
 python -m venv venv
 pip install -r requirements.txt
@@ -104,7 +138,7 @@ pipenv install
 python index_data.py
 ```
   ```bash
-  uvicorn app.main:app --reload
+  python manage.py runserver
   ```
 
 - **Run frontend:**
@@ -123,7 +157,7 @@ python index_data.py
 
   ```bash
   cd offer_crawler
-  scrapy crawl offerspider
+  scrapy crawl <spider-name>
   ```
 
 **Elasticsearch note / troubleshooting**

@@ -7,13 +7,13 @@ __pycache__/
 .env
 *.pyc
 .DS_Store
-mongo_data/
+
 
 # C extensions
 *.pyd
 
 # Virtual environments
-venv/
+.venv/
 env/
 ENV/
 .python-version
