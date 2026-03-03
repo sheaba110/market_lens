@@ -18,7 +18,7 @@ if sys.platform == "win32":
 BOT_NAME = "offer_crawler"
 
 SPIDER_MODULES = ["offer_crawler.spiders"]
-NEWSPIDER_MODULE = "offer_crawler.spiders"
+NEWSPIDER_MODULE = "offer_crawler.spiders" 
 
 ADDONS = {}
 

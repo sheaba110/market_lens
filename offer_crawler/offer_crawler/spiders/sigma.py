@@ -19,8 +19,8 @@ class SigmaspiderSpider(CrawlSpider):
 
     def parse_item(self, response):
         items = response.css("div.border-sigma-blue-lighter")
-        for itemS in items:
-            l = ItemLoader(item=ItemsCrawler(), selector=itemS)
+        for product in items:
+            l = ItemLoader(item=ItemsCrawler(), selector=product)
             l.add_css("title", "a.chakra-tooltip__trigger::text")
             l.add_css("image", "img.w-full::attr(srcset)", MapCompose(response.urljoin))
             l.add_css("url", "a.font-semibold::attr(href)", MapCompose(response.urljoin))
