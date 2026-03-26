@@ -24,6 +24,7 @@ class BadrgrbSpider(scrapy.Spider):
     def start_requests(self):
         urls = [
             "https://elbadrgroupeg.store/index.php?route=product/catalog",
+            "https://elbadrgroupeg.store/index.php?route=product/special",
         ]
         for url in urls:
             yield scrapy.Request(

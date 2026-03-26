@@ -146,3 +146,8 @@ tmp/
 *.zip
 celerybeat-schedule
 
+# Ignored folders & files
+*.csv
+*.json
+*.xlsx
+screen_shots/
