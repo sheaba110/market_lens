@@ -1,7 +1,7 @@
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from itemloaders.processors import MapCompose
-from urllib.parse import urlparse, parse_qs, urlencode, urlunparse, urljoin
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from ..items import ItemsCrawler
 from scrapy.loader import ItemLoader
 class SigmaspiderSpider(CrawlSpider):
