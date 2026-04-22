@@ -7,21 +7,6 @@
 [![Django](https://img.shields.io/badge/Django-5.2.11-darkgreen.svg)](https://www.djangoproject.com/)
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://react.dev/)
 
-## 📋 Table of Contents
-
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Usage](#-usage)
-- [Project Structure](#-project-structure)
-- [API Documentation](#-api-documentation)
-- [Web Scraping](#-web-scraping)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
-- [License](#-license)
-
 ## ✨ Features
 
 - **Full-Text Search**: Fast and efficient search across millions of PC components
@@ -30,7 +15,7 @@
 - **Price Comparison**: Compare prices across different retailers and identify the best deals
 - **Responsive UI**: Modern React frontend for seamless user experience
 - **Scalable Architecture**: Docker support for easy deployment and scaling
-- **Elasticsearch Integration**: Powerful indexing and search capabilities
+- **Meilicsearch Integration**: Powerful indexing and search capabilities
 
 
 ## 🛠 Tech Stack
@@ -38,7 +23,7 @@
 | Layer | Technology |
 |-------|------------|
 | **Backend** | Django 5.2.11 |
-| **Search/Indexing** | Elasticsearch 9.2.0 |
+| **Search/Indexing** | meilisearch 0.41.0|
 | **Web Scraping** | Scrapy 2.13.3, lxml 6.0.2 |
 | **Frontend** | React 18.2.0, Bootstrap 5.3.8 |
 | **Containerization** | Docker, Docker Compose |
@@ -49,7 +34,7 @@ Before you begin, ensure you have the following installed:
 
 - **Python** 3.9 or higher
 - **Node.js** 14 or higher and npm
-- **Elasticsearch** 8.0 or higher
+- **Meilicsearch** 8.0 or higher
 - **Git**
 - **Docker & Docker Compose** (optional, for containerized deployment)
 
@@ -110,8 +95,8 @@ This will start Elasticsearch and other required services.
 Set the following environment variables in your system:
 
 ```bash
-# Elasticsearch Configuration
-ELASTICSEARCH_URL=http://localhost:9200
+# Meilicsearch Configuration
+MEILICSEARCH_URL=http://localhost:9200
 SEARCH_INDEX_NAME=market_lens_index
 
 # Django Configuration (optional)
@@ -121,9 +106,9 @@ SECRET_KEY=your-secret-key-here
 
 ### Elasticsearch Setup
 
-Ensure Elasticsearch is running on your system. By default, it listens on `http://localhost:9200`.
+Ensure Meilicsearch is running on your system. By default, it listens on `http://localhost:9200`.
 
-**To verify Elasticsearch is running:**
+**To verify Meilicsearch is running:**
 ```bash
 curl http://localhost:9200
 ```
@@ -226,9 +211,10 @@ Search for PC components by query string.
   "results": [
     {
       "id": "1",
-      "name": "Component Name",
+      "title": "Component Name",
+      "image": "image url",
       "price": 99.99,
-      "retailer": "Retailer Name",
+      "vendor": "vendor Name",
       "url": "https://example.com/product"
     }
   ],
@@ -242,7 +228,7 @@ Search for PC components by query string.
 
 - **badrgrb.py**: Scrapes PC components from Badrgrb retailer
 - **sigma.py**: Scrapes PC components from Sigma retailer
-
+- **frensia.py**: Scrapes Pc components from Al-fernsia Group retailer
 ### Running Spiders Manually
 
 ```bash
@@ -264,47 +250,6 @@ scrapy crawl sigma -o output.json
 2. Inherit from `scrapy.Spider` class
 3. Define parsing logic and rules
 4. Update Scrapy settings if necessary
-
-## 🔧 Troubleshooting
-
-### Elasticsearch Connection Issues
-
-**Error:** `ConnectionError: Failed to establish a new connection`
-
-**Solution:**
-- Verify Elasticsearch is running: `curl http://localhost:9200`
-- Check `ELASTICSEARCH_URL` environment variable
-- Ensure Elasticsearch version compatibility (8.0+)
-- Check firewall and network settings
-
-### Port Already in Use
-
-**Error:** `Port 8000/3000/9200 already in use`
-
-**Solution:**
-- Change the port when running: `python manage.py runserver 8001`
-- Or kill the process using the port:
-  - **Windows:** `netstat -ano | findstr :8000` then `taskkill /PID <PID>`
-  - **Linux/Mac:** `lsof -i :8000` then `kill -9 <PID>`
-
-### Module Not Found
-
-**Error:** `ModuleNotFoundError: No module named ...`
-
-**Solution:**
-- Activate virtual environment
-- Reinstall dependencies: `pip install -r requirements.txt`
-- Clear pip cache: `pip cache purge`
-
-### Spider Issues
-
-**Error:** Spider not returning results
-
-**Solution:**
-- Check spider configuration and target URL
-- Verify website accessibility
-- Review Scrapy logs: `scrapy crawl <spider-name> -L DEBUG`
-- Check robot.txt compliance
 
 ## 🤝 Contributing
 
