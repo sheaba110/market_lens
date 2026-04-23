@@ -1,17 +1,18 @@
 from django.contrib import admin
-from .models import CustomUser
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
 
 
+User = get_user_model()
 class CustomUserAdmin(UserAdmin):
-    list_display = ("email", "first_name", "last_name", "is_staff")
-    ordering = ("email",)
+    list_display = ("username", "is_staff")
+    ordering = ("username",)
 
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("username", "password")}),
         (
             "Personal info",
-            {"fields": ("username", "first_name", "last_name", "phone_number")},
+            {"fields": ("email", "phone_number")},
         ),
         (
             "Permissions",
@@ -22,7 +23,7 @@ class CustomUserAdmin(UserAdmin):
 
     add_fieldsets = (
         (None, {'classes': ('wide',),
-                'fields': ('email', 'username', 'first_name', 'last_name', 'phone_number', 'password')})
+                'fields': ('email', 'username','phone_number', 'password')})
     )
 
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(User, CustomUserAdmin)
