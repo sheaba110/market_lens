@@ -1,6 +1,5 @@
 import scrapy
 from scrapy_playwright.page import PageMethod
-from scrapy.spiders import CrawlSpider, Rule
 from itemloaders.processors import MapCompose
 from ..items import ItemsCrawler
 from scrapy.loader import ItemLoader
