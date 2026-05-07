@@ -1,11 +1,6 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-<<<<<<< HEAD
 import hashlib
-=======
-
-
->>>>>>> 2025198ffdce2bdef73cb58f36dc3462667fbe1b
 
 
 class OfferCrawlerPipeline:
@@ -18,8 +13,3 @@ class OfferCrawlerPipeline:
                 item["id"] = hashlib.md5(product_url.encode("utf-8")).hexdigest()
             
         return item
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 2025198ffdce2bdef73cb58f36dc3462667fbe1b
