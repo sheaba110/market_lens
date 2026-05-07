@@ -1,0 +1,48 @@
+.login {
+  margin: 2rem auto;
+  max-width: 420px;
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.login h2 {
+  margin-bottom: 0.75rem;
+}
+
+.login-form {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  margin-top: 0.35rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-primary);
+}
+
+.login-submit {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  background: var(--accent-solid);
+  color: white;
+  font-weight: 600;
+}
+
+.login-error {
+  color: var(--error);
+  background: var(--error-bg);
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+}

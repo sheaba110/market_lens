@@ -1,8 +1,17 @@
 from django.urls import path
-from rest_framework import routers
-from .views import CreateUserView, UserListView
+from .views import UserCreateView, UserProfile, UserProfileList
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 urlpatterns = [
-    path ('register/', CreateUserView.as_view(), name='create-user'),
-    path('users/', UserListView.as_view(), name='users-list')
+    path('register/', UserCreateView.as_view(), name='create-user'),
+    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('profile/', UserProfileList.as_view(), name='profiles'),
+    path('profile/<int:id>/', UserProfile.as_view(), name='profile' ),
+    
+
 ]

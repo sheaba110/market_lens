@@ -18,7 +18,7 @@ def clean_price(value):
 
 
 class ItemsCrawler(scrapy.Item):
-
+    id = scrapy.Field()
     image = scrapy.Field(
         output_processor=TakeFirst(),
     )

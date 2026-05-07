@@ -71,10 +71,10 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
-# ITEM_PIPELINES = {
-#     "offer_crawler.pipelines.OfferCrawlerPipeline": 300,
-#     # "offer_crawler.pipelines.SaveToMongoPipeline": 800,
-# }
+ITEM_PIPELINES = {
+    "offer_crawler.pipelines.OfferCrawlerPipeline": 300,
+    # "offer_crawler.pipelines.SaveToMongoPipeline": 800,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

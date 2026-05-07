@@ -4,8 +4,14 @@ from itemloaders.processors import MapCompose
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from ..items import ItemsCrawler
 from scrapy.loader import ItemLoader
+import re
+
+def extract_first_url(value):
+    if value:
+        return value.split(' ')[0].strip(',')
+    return value
 class SigmaspiderSpider(CrawlSpider):
-    name = "sigmaspider"
+    name = "sigma"
     allowed_domains = ["sigma-computer.com"]
     start_urls = [
         "https://sigma-computer.com/en/category/9f5039af-f5d2-4396-9ba2-8ac40277c373",
@@ -16,13 +22,13 @@ class SigmaspiderSpider(CrawlSpider):
         Rule(LinkExtractor(allow=(r"item?id=")), callback="parse_item", follow=True),
         Rule(LinkExtractor(allow=(r"category",)), callback="parse_item", follow=True),
     )
-
+    
     def parse_item(self, response):
         items = response.css("div.border-sigma-blue-lighter")
         for product in items:
             l = ItemLoader(item=ItemsCrawler(), selector=product)
             l.add_css("title", "a.chakra-tooltip__trigger::text")
-            l.add_css("image", "img.w-full::attr(srcset)", MapCompose(response.urljoin))
+            l.add_css("image", "img.w-full::attr(srcset)", MapCompose(extract_first_url, response.urljoin))
             l.add_css("url", "a.font-semibold::attr(href)", MapCompose(response.urljoin))
             l.add_value("vendor", "https://sigma-computer.com")
             l.add_css("price", "p.font-bold::text")

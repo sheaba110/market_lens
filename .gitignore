@@ -115,10 +115,6 @@ ehthumbs.db
 docker-compose.override.yml
 .docker/
 
-# Elasticsearch
-data/elasticsearch/
-elasticsearch/
-
 # Temporary & cache files
 *.tmp
 *.temp
@@ -151,3 +147,20 @@ celerybeat-schedule
 *.json
 *.xlsx
 screen_shots/
+
+# Meilisearch data directory
+# يتم تجاهل مجلد البيانات لأنه يحتوي على الـ Indexes وقاعدة البيانات الفعلية
+data.ms/
+
+# Meilisearch configuration
+# تجاهل مفاتيح الوصول (Master Key) لو كنت واضعها في ملف نصي
+meilisearch.key
+master.key
+
+# Log files
+meilisearch.log
+
+# Dump files (النسخ الاحتياطية التي ينتجها Meilisearch)
+dumps/
+
+meilisearch.exe

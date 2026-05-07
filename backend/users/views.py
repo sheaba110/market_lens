@@ -1,16 +1,24 @@
-from django.shortcuts import render
 from rest_framework import generics
-from django.http import HttpResponse, JsonResponse
-from users.serializers import UserSerializer
-from users.models import CustomUser
-from rest_framework.permissions import AllowAny
+from users.serializers import UserSerializer, UserProfileSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from django.contrib.auth import get_user_model
+User = get_user_model()
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny] 
 
-class CreateUserView(generics.CreateAPIView):
-    queryset = CustomUser.objects.all()
+class UserProfile(generics.RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+    def get_object(self): # type: ignore
+        return self.request.user.profile # type: ignore
+
+class UserProfileList(generics.ListAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
     
-class UserListView(generics.ListCreateAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    def get_object(self):
+        return self.request.user.profile # type: ignore

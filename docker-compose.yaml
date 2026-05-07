@@ -1,43 +1,25 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: market_postgres
-    restart: unless-stopped
+  meilisearch:
+    image: 'getmeili/meilisearch:latest'
+    container_name: meilisearch_db
     ports:
-      - "5432:5432"
-    environment:
-       POSTGRES_USER: ${POSTGRES_USER}
-       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-       POSTGRES_DB: ${POSTGRES_DB}
+      - '7700:7700'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - market_net
-
-  # Service 2: Elasticsearch
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
-    container_name: market_elastic
-    restart: unless-stopped
+      - ./meili_data:/data.ms
     environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - MEILI_MASTER_KEY=aSampleMasterKey
+      - MEILI_ENV=development
+    restart: always
+
+  app:
+    image: 'getmeili/meilisearch:latest' 
     ports:
-      - "9200:9200"
-    volumes:
-      - es_data:/usr/share/elasticsearch/data
-    networks:
-      - market_net
-
-# Define persistent storage
-volumes:
-  postgres_data: 
-  es_data:
-
-# Define a custom network
-networks:
-  market_net:
-    driver: bridge
+      - '7700:7700'
+    environment:
+      - MEILI_URL=http://meilisearch:7700
+      - MEILI_MASTER_KEY=aSampleMasterKey
+    depends_on:
+      - meilisearch
+    restart: always
