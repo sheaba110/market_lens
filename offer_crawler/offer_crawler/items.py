@@ -19,22 +19,23 @@ def clean_price(value):
 
 class ItemsCrawler(scrapy.Item):
     id = scrapy.Field()
-    image = scrapy.Field(
-        output_processor=TakeFirst(),
-    )
+    
     title = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
-    price = scrapy.Field(
-        input_processor=MapCompose(remove_tags, filter_price, clean_price),
+    image = scrapy.Field(
+        output_processor=TakeFirst(),
+    )
+    url = scrapy.Field(
+        input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
     vendor = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
-    url = scrapy.Field(
-        input_processor=MapCompose(remove_tags),
+    price = scrapy.Field(
+        input_processor=MapCompose(remove_tags, filter_price, clean_price),
         output_processor=TakeFirst(),
     )

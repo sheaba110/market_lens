@@ -44,6 +44,8 @@ venv.bak/
 *.sqlite
 *.db
 *.db-journal
+backend/profile_pics/
+
 media/
 mediafiles/
 staticfiles/
@@ -149,18 +151,17 @@ celerybeat-schedule
 screen_shots/
 
 # Meilisearch data directory
-# يتم تجاهل مجلد البيانات لأنه يحتوي على الـ Indexes وقاعدة البيانات الفعلية
 data.ms/
+meili_data;C/
 
 # Meilisearch configuration
-# تجاهل مفاتيح الوصول (Master Key) لو كنت واضعها في ملف نصي
 meilisearch.key
 master.key
 
 # Log files
 meilisearch.log
 
-# Dump files (النسخ الاحتياطية التي ينتجها Meilisearch)
+# Dump files
 dumps/
-
+# Meilisearch executable
 meilisearch.exe

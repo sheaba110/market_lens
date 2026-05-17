@@ -4,7 +4,7 @@ from itemloaders.processors import MapCompose
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from ..items import ItemsCrawler
 from scrapy.loader import ItemLoader
-import re
+# import re
 
 def extract_first_url(value):
     if value:

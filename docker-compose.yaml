@@ -1,25 +1,79 @@
-version: '3.8'
-
 services:
-  meilisearch:
-    image: 'getmeili/meilisearch:latest'
-    container_name: meilisearch_db
+  web:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: django
     ports:
-      - '7700:7700'
+      - ${PORT}:8000
     volumes:
-      - ./meili_data:/data.ms
+      - ./backend:/app
+    working_dir: /app
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - database
+      - search_engine
     environment:
-      - MEILI_MASTER_KEY=aSampleMasterKey
-      - MEILI_ENV=development
+      - DEBUG=${DEBUG}
+      - MEILI_URL=${MEILI_URL}
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+    networks:
+      - market_lens_network
+    restart: always
+  
+  database:
+    image: 'postgres:18-alpine'
+    container_name: market_lens_db
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/18.4/data
+    networks:
+      - market_lens_network
     restart: always
 
-  app:
-    image: 'getmeili/meilisearch:latest' 
-    ports:
-      - '7700:7700'
-    environment:
-      - MEILI_URL=http://meilisearch:7700
-      - MEILI_MASTER_KEY=aSampleMasterKey
+  offer_crawler:
+    build:
+      context: .
+      dockerfile: offer_crawler/Dockerfile
+    container_name: offer_crawler
+    working_dir: /app
+    command: sh -c "scrapy crawl badrgrb -o exports/products.json && scrapy crawl frensia -o exports/products.json && scrapy crawl hardwaremarket -o exports/products.json && scrapy crawl sigma -o exports/products.json"
     depends_on:
-      - meilisearch
+      - database
+      - search_engine
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - ./offer_crawler/exports:/app/exports
+      - ./offer_crawler:/app
+    networks:
+      - market_lens_network
     restart: always
+  
+  search_engine:
+    image: 'getmeili/meilisearch:v1.43.0'
+    container_name: market_lens_meilisearch
+    ports:
+      - ${MEILI_PORT:-7700}:7700
+    volumes:
+      - ./meili_data:/meili_data
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+      - MEILI_ENV=development
+    networks:
+      - market_lens_network
+    restart: always
+
+volumes:
+  postgres_data:
+  meili_data:
+
+networks:
+  market_lens_network:
+    driver: bridge

@@ -100,6 +100,7 @@ AUTOTHROTTLE_DEBUG = False
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
 
+FEED_EXPORT_FIELDS = ['title', 'image', 'url', 'vendor', 'price']
 # Scrapy-playwright setup section
 
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
