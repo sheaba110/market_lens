@@ -39,28 +39,25 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, related_name="profile"
-    )
-    profile_picture = models.ImageField(
-        null=True, blank=True, default="default.jpg", upload_to="profile_pics"
-    )
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
+    profile_picture = models.ImageField(null=True, blank=True, default="default.jpg", upload_to="profile_pics")
     bio = models.TextField(max_length=255, blank=True, editable=True)
     birth_date = models.DateField(blank=True, null=True)
-    phone_number = models.CharField(
-        max_length=20, blank=True, default='', editable=True
-    )
+    phone_number = models.CharField(max_length=20, unique=True, blank=True, null=True)
     facebook_url = models.URLField(blank=True, editable=True)
 
     def __str__(self):
         return f"{self.user.username} Profile"
 
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-    
+
+
 post_save.connect(create_user_profile, sender=CustomUser)
 post_save.connect(save_user_profile, sender=CustomUser)
