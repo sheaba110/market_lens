@@ -67,6 +67,7 @@ Protego==0.6.0
 psycopg==3.3.4
 psycopg-binary==3.3.4
 psycopg-pool==3.3.1
+psycopg2-binary==2.9.12
 pure_eval==0.2.3
 pwdlib==0.3.0
 pyasn1==0.6.2

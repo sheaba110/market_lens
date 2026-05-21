@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
             'password', 
             'password_confirm'
         ]
-
+    
     def validate(self, attrs):
         if attrs['password'] != attrs['password_confirm']:
             raise serializers.ValidationError({"password": "Password fields didn't match."})

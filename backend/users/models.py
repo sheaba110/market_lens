@@ -48,7 +48,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=255, blank=True, editable=True)
     birth_date = models.DateField(blank=True, null=True)
     phone_number = models.CharField(
-        max_length=20, unique=True, blank=True, editable=True
+        max_length=20, blank=True, default='', editable=True
     )
     facebook_url = models.URLField(blank=True, editable=True)
 
