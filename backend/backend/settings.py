@@ -11,10 +11,10 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0i2$p)qa)mwt-$fxj45k781wq3dm(p=2!t8_a=3g1l7hwi91%v"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -84,11 +84,14 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USER"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+        "HOST": os.getenv("DATABASE_HOST"),
+        "PORT": os.getenv("DATABASE_PORT"),
+    }
 }
 
 
@@ -114,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-CORS_ORIGIN_WHITELIST = "http://localhost:3000"
+CORS_ORIGIN_WHITELIST = [os.getenv("FRONTEND_URL")]
 
 LANGUAGE_CODE = "en-us"
 

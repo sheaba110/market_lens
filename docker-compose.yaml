@@ -1,9 +1,12 @@
+name: market-lens-backend
 services:
   web:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: django
+    env_file:
+      - .env
     ports:
       - ${PORT}:8000
     volumes:
@@ -16,25 +19,42 @@ services:
       search_engine:
         condition: service_healthy
     environment:
+      - POSTGRES_HOST=${DATABASE_HOST}
+      - POSTGRES_PORT=${DATABASE_PORT}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - DEBUG=${DEBUG}
       - MEILI_URL=${MEILI_URL}
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
       - DATABASE_URL=${DATABASE_URL}
+      
     networks:
       - market_lens_network
     restart: always
   
   database:
-    image: 'DATABASE:18-alpine'
+    image: 'postgres:18-alpine'
+    env_file:
+      - .env
     container_name: market_lens_db
     ports:
-      - ${PORT:-5432}:5432
+      - ${DATABASE_PORT}:5432
     environment:
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_DB=${DATABASE_DB}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_HOST=${DATABASE_HOST}
+      - POSTGRES_PORT=${DATABASE_PORT}
+      - DATABASE_URL=${DATABASE_URL}
+    healthcheck:
+      test: ["CMD", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME} -h ${DATABASE_HOST} -p ${DATABASE_PORT}"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
     volumes:
-      - DATABASE_data:/var/lib/DATABASEql/18.4/data
+      - database_data:/var/lib/postgresql/data
     networks:
       - market_lens_network
     restart: always
@@ -60,6 +80,8 @@ services:
   
   search_engine:
     image: 'getmeili/meilisearch:v1.43.0'
+    env_file:
+      - .env
     container_name: market_lens_meilisearch
     ports:
       - ${MEILI_PORT:-7700}:7700
@@ -68,12 +90,18 @@ services:
     environment:
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
       - MEILI_ENV=development
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7700/health"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 6
+      start_period: 30s
     networks:
       - market_lens_network
     restart: always
 
 volumes:
-  DATABASE_data:
+  database_data:
   meili_data:
 
 networks:
