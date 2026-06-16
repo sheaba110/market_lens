@@ -9,7 +9,6 @@ from users.models import ScrapedItem, PriceHistory #type: ignore
 
 class OfferCrawlerPipeline:
 
-    # 1. بنعزل كل عمليات الداتابيز في دالة لوحدها ونحولها لـ Async
     @sync_to_async
     def save_item_to_db(self, adapter, product_url, item_hash, spider):
         scraped_item, created = ScrapedItem.objects.update_or_create(

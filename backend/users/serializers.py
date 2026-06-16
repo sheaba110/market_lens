@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile
+from .models import Profile, ScrapedItem, PriceHistory
 from django.contrib.auth import get_user_model
 
 
@@ -37,3 +37,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['user', 'profile_picture', 'bio', 'birth_date', 'phone_number', 'facebook_url']
+        
+class ScrapedItemSerializer(serializers.ModelSerializer):
+    current_price = serializers.SerializerMethodField()
+    class Meta:
+        model = ScrapedItem(read_only=True)
+        fields = ['id', 'title', 'url', 'image_url', 'vendor', 'current_price']
+        def get_current_price(self, obj):
+            latest_price_obj = obj.price_history.first()
+            if latest_price_obj:
+                return latest_price_obj.price
+            return None

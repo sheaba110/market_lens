@@ -65,7 +65,7 @@ services:
       dockerfile: offer_crawler/Dockerfile
     container_name: offer_crawler
     working_dir: /app
-    command: sh -c "scrapy crawl badrgrb -o exports/products.json && scrapy crawl frensia -o exports/products.json && scrapy crawl hardwaremarket -o exports/products.json && scrapy crawl sigma -o exports/products.json"
+    command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"    
     depends_on:
       - database
       - search_engine
