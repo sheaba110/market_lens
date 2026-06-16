@@ -1,5 +1,4 @@
 import os
-import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -22,17 +21,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "corsheaders",
-    "django_filters",
+    "users",
     "rest_framework_simplejwt",
     "rest_framework",
+    "channels",
+    "django_filters",
+    "corsheaders",
     "PIL",
 ]
 
@@ -80,7 +80,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {"hosts": [("127.0.0.1", 6379)]},
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 DATABASES = {
@@ -89,7 +94,6 @@ DATABASES = {
         "NAME": os.getenv("DATABASE_NAME"),
         "USER": os.getenv("DATABASE_USER"),
         "PASSWORD": os.getenv("DATABASE_PASSWORD"),
-        "HOST": os.getenv("DATABASE_HOST"),
         "PORT": os.getenv("DATABASE_PORT"),
     }
 }

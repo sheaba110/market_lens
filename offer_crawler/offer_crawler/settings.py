@@ -8,6 +8,24 @@
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 import sys
+import os
+import sys
+import django
+from pathlib import Path
+
+current_file_path = Path(__file__).resolve()
+
+BASE_DIR = current_file_path.parent.parent.parent
+
+DJANGO_ROOT = BASE_DIR / "backend"
+
+print(f"====== DEBUG: DJANGO_ROOT is pointing to -> {DJANGO_ROOT} ======")
+
+sys.path.append(str(DJANGO_ROOT))
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "backend.settings"
+
+django.setup()
 
 # Windows-specific fix for Python 3.8+ and Twisted/Asyncio
 if sys.platform == "win32":
@@ -18,7 +36,7 @@ if sys.platform == "win32":
 BOT_NAME = "offer_crawler"
 
 SPIDER_MODULES = ["offer_crawler.spiders"]
-NEWSPIDER_MODULE = "offer_crawler.spiders" 
+NEWSPIDER_MODULE = "offer_crawler.spiders"
 
 ADDONS = {}
 
@@ -100,7 +118,7 @@ AUTOTHROTTLE_DEBUG = False
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
 
-FEED_EXPORT_FIELDS = ['title', 'image', 'url', 'vendor', 'price']
+FEED_EXPORT_FIELDS = ["title", "image", "url", "vendor", "price"]
 # Scrapy-playwright setup section
 
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
@@ -112,7 +130,6 @@ DOWNLOAD_HANDLERS = {
 }
 
 
-
 PLAYWRIGHT_LAUNCH_OPTIONS = {
     "headless": False,
     "timeout": 20 * 1000,
@@ -121,4 +138,3 @@ PLAYWRIGHT_LAUNCH_OPTIONS = {
 PLAYWRIGHT_BROWSER_TYPE = "chromium"
 
 DOWNLOAD_TIMEOUT = 60
-
