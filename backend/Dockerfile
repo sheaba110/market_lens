@@ -2,18 +2,16 @@ FROM python:3.11-slim
 
 WORKDIR /app_backend
 
-# Install system dependencies
+# Install system dependencies (Using apt-get for Debian-based slim image)
 RUN apt-get update && apt-get install -y \
     gcc \
-    && rm -rf /var/lib/apt/lists/* \
-    apk add --update --upgrade --no-cache postgresql-client \ 
-    apk add --update --upgrade --no-cache --virtual .tmp \
-        postgresql-dev 
-
+    postgresql-client \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt && apk del .tmp
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the Django application
 COPY . .

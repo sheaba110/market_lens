@@ -1,9 +1,9 @@
 import os
 import time
 from typing import Any, Dict, List, cast
+import meilisearch
 import psycopg2
 from psycopg2.extras import RealDictCursor
-import meilisearch
 
 PG_USER = os.getenv("DATABASE_USER")
 PG_DATABASE = os.getenv("DATABASE_NAME")
@@ -12,7 +12,7 @@ PG_HOST = os.getenv("DATABASE_HOST")
 PG_PORT = os.getenv("DATABASE_PORT")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-MEILI_HOST = os.getenv("MEILI_HOST", "http://meilisearch:7700")
+MEILI_URL = os.getenv("MEILI_URL") or os.getenv("MEILI_HOST", "http://search_engine:7700")
 MEILI_MASTER_KEY = os.getenv("MEILI_MASTER_KEY")
 
 
@@ -31,13 +31,11 @@ def get_db_connection():
 
 
 def init_meilisearch_index():
-    client = meilisearch.Client(MEILI_HOST, MEILI_MASTER_KEY)
+    client = meilisearch.Client(MEILI_URL, MEILI_MASTER_KEY)
     index = client.index("products")
 
     index.update_searchable_attributes(["title", "vendor"])
-
     index.update_filterable_attributes(["vendor", "price"])
-
     index.update_sortable_attributes(["price"])
 
     print("Meilisearch index settings updated successfully.")
@@ -50,12 +48,12 @@ def start_indexing(batch_size: int = 1000) -> None:
 
     try:
         with db_conn.cursor() as cursor:
-            cursor.execute("SELECT COUNT(*) FROM products;")
+            cursor.execute("SELECT COUNT(*) FROM scraped_items;")
 
             count_result = cast(Dict[str, int], cursor.fetchone())
             total_records = count_result["count"] if count_result else 0
 
-            print(f"Total products found in PostgreSQL: {total_records}")
+            print(f"Total scraped items found in PostgreSQL: {total_records}")
 
             offset = 0
             while offset < total_records:
@@ -63,9 +61,22 @@ def start_indexing(batch_size: int = 1000) -> None:
 
                 cursor.execute(
                     """
-                    SELECT id, title, image, url, vendor, price 
-                    FROM products 
-                    ORDER BY id 
+                    SELECT
+                        item.id::text AS id,
+                        item.title,
+                        item.image_url,
+                        item.url,
+                        item.vendor,
+                        latest_price.price::float AS price
+                    FROM scraped_items AS item
+                    LEFT JOIN LATERAL (
+                        SELECT price
+                        FROM price_history
+                        WHERE item_id = item.id
+                        ORDER BY scraped_at DESC
+                        LIMIT 1
+                    ) AS latest_price ON TRUE
+                    ORDER BY item.id
                     LIMIT %s OFFSET %s;
                     """,
                     (batch_size, offset),
@@ -96,3 +107,4 @@ def start_indexing(batch_size: int = 1000) -> None:
 
 if __name__ == "__main__":
     start_indexing(batch_size=1000)
+
