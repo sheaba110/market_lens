@@ -99,5 +99,12 @@ class PriceHistory(models.Model):
         return f"{self.item.title} - {self.price}"
     
     
+class WishList(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    product = models.ManyToManyField(ScrapedItem, blank=True)
+    def __str__(self):
+        return f"Wishlist of {self.user.username}"
+    
+
 post_save.connect(create_user_profile, sender=CustomUser)
 post_save.connect(save_user_profile, sender=CustomUser)
