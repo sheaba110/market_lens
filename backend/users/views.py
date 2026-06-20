@@ -66,9 +66,11 @@ class ItemDetailView(generics.RetrieveAPIView):
 class DashboardProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
     permission_class = [IsAuthenticated]
-
+    queryset = User.objects.all() # type: ignore
+    
     def get_object(self):
-        return self.request.user.profile  # type: ignore
+        # السطر ده بيحل كل مشاكل الـ Queryset والـ URL والـ Lookup
+        return self.request.user.profile # type: ignore
 
 
 class WishListView(generics.RetrieveUpdateAPIView):
@@ -98,6 +100,7 @@ class WishListView(generics.RetrieveUpdateAPIView):
 
 
 class ItemsListView(generics.ListAPIView):
+    permission_classes = [AllowAny]
     queryset = ScrapedItem.objects.prefetch_related('price_history').all().distinct()
     serializer_class = ScrapedItemSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]    

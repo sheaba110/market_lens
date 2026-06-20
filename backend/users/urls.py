@@ -6,7 +6,7 @@ from .views import (
     ItemDetailView,
     ItemsListView,
     DashboardProfileView,
-    WishListView,  # ضفنا الـ View الجديد بتاع المفضلة
+    WishListView,
 )
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -21,6 +21,6 @@ urlpatterns = [
     path("profile/<int:id>/", UserProfile.as_view(), name="profile"),
     path("products/", ItemsListView.as_view(), name="products"),
     path("products/<uuid:pk>/", ItemDetailView.as_view(), name="product-detail"),
-    path("dashboard/", DashboardProfileView.as_view(), name="dashboard"),
+    path("dashboard/profile/", DashboardProfileView.as_view(), name="dashboard"),
     path("wishlist/toggle/<uuid:item_id>/", WishListView.as_view(),name="wishlist-toggle"),
 ]

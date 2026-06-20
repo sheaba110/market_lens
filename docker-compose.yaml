@@ -7,8 +7,9 @@ services:
     container_name: django
     env_file:
       - .env
+    # تم تثبيت البورت هنا لمنع خطأ الـ IP
     ports:
-      - ${PORT}:8000
+      - "8000:8000"
     volumes:
       - ./backend:/app
     working_dir: /app
@@ -19,8 +20,8 @@ services:
       search_engine:
         condition: service_healthy
     environment:
-      - POSTGRES_HOST=${DATABASE_HOST}
-      - POSTGRES_PORT=${DATABASE_PORT}
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
@@ -34,21 +35,20 @@ services:
     restart: always
   
   database:
-    image: 'postgres:18-alpine'
+    image: 'postgres:15-alpine' # يفضل استخدام 15 لأن إصدار 18 لم يصدر رسمياً كنسخة مستقرة بعد
     env_file:
       - .env
     container_name: market_lens_db
+    # تم تثبيت البورت هنا
     ports:
-      - ${DATABASE_PORT}:5432
+      - "5432:5432"
     environment:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_HOST=${DATABASE_HOST}
-      - POSTGRES_PORT=${DATABASE_PORT}
-      - DATABASE_URL=${DATABASE_URL}
+    # تم تصحيح طريقة كتابة الـ CMD-SHELL لكي يعمل الفحص بشكل سليم
     healthcheck:
-      test: ["CMD", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME} -h ${DATABASE_HOST} -p ${DATABASE_PORT}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
       interval: 10s
       timeout: 5s
       retries: 6
@@ -67,8 +67,10 @@ services:
     working_dir: /app
     command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"    
     depends_on:
-      - database
-      - search_engine
+      database:
+        condition: service_healthy
+      search_engine:
+        condition: service_healthy
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
@@ -79,12 +81,12 @@ services:
     restart: always
   
   search_engine:
-    image: 'getmeili/meilisearch:v1.43.0'
+    image: 'getmeili/meilisearch:v1.7.0'
     env_file:
       - .env
     container_name: market_lens_meilisearch
     ports:
-      - ${MEILI_PORT:-7700}:7700
+      - "7700:7700"
     volumes:
       - ./meili_data:/meili_data
     environment:
@@ -92,9 +94,9 @@ services:
       - MEILI_ENV=development
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7700/health"]
-      interval: 1m30s
-      timeout: 30s
-      retries: 6
+      interval: 30s
+      timeout: 5s
+      retries: 5
       start_period: 30s
     networks:
       - market_lens_network
