@@ -30,7 +30,7 @@ class SigmaspiderSpider(CrawlSpider):
             l.add_css("title", "a.chakra-tooltip__trigger::text")
             l.add_css("image", "img.w-full::attr(srcset)", MapCompose(extract_first_url, response.urljoin))
             l.add_css("url", "a.font-semibold::attr(href)", MapCompose(response.urljoin))
-            l.add_value("vendor", "https://sigma-computer.com")
+            l.add_value("vendor", "sigma-computer")
             l.add_css("price", "p.font-bold::text")
             yield l.load_item()
 

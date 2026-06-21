@@ -27,7 +27,7 @@ class FrensiaSpider(scrapy.Spider):
             if numbers:
                 l.add_value("price", str(min(numbers)))
 
-            l.add_value("vendor", "https://alfrensia.com")
+            l.add_value("vendor", "alfrensia")
             l.add_css("url", "a.woocommerce-LoopProduct-link::attr(href)")
 
             yield l.load_item()

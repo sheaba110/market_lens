@@ -45,6 +45,6 @@ class BadrgrbSpider(scrapy.Spider):
             l.add_css("title", "div.name a::text")
             l.add_css("image", "img.img-responsive::attr(src)", MapCompose(response.urljoin))
             l.add_css("url", "a::attr(href)", MapCompose(response.urljoin))
-            l.add_value("vendor", "elbadrgroupeg.store")
+            l.add_value("vendor", "elbadr-group")
             l.add_css("price", "div.price *::text", MapCompose(extract_price_number))
             yield l.load_item()

@@ -56,7 +56,7 @@ class HardwaremarketNetSpider(scrapy.Spider):
             ]
             if numbers:
                 l.add_value("price", str(min(numbers)))
-            l.add_value("vendor", "https://hardwaremarket.net")
+            l.add_value("vendor", "hardware-market")
             l.add_css(
                 "url",
                 "div.wd-product-thumb.product-element-top.wd-quick-shop a::attr(href)",

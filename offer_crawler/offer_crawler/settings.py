@@ -121,7 +121,6 @@ FEED_EXPORT_ENCODING = "utf-8"
 FEED_EXPORT_FIELDS = ["title", "image", "url", "vendor", "price"]
 # Scrapy-playwright setup section
 
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 
 
 DOWNLOAD_HANDLERS = {
@@ -129,11 +128,18 @@ DOWNLOAD_HANDLERS = {
     "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
 }
 
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 
 PLAYWRIGHT_LAUNCH_OPTIONS = {
-    "headless": False,
+    "headless": True,
     "timeout": 20 * 1000,
+    "args": [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage", 
+    ],
 }
+PLAYWRIGHT_DEFAULT_NAVIGATION_TIMEOUT = 60000
 
 PLAYWRIGHT_BROWSER_TYPE = "chromium"
 

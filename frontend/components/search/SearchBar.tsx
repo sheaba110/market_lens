@@ -1,7 +1,9 @@
 ﻿"use client";
 
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { searchProducts } from "@/lib/api/products";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 import type { Product } from "@/lib/types/product";
@@ -14,15 +16,20 @@ const trendingKeywords = [
   "Desktop processors",
 ];
 
-function formatPrice(price: number, currency: Product["currency"]) {
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=1200&auto=format&fit=crop";
+
+function formatPrice(price: number, currency?: string) {
+  const safeCurrency = currency || "EGP";
+  
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency,
+    currency: safeCurrency,
     maximumFractionDigits: 0,
   }).format(price);
 }
 
 export function SearchBar() {
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
@@ -35,6 +42,11 @@ export function SearchBar() {
     let isMounted = true;
 
     async function runSearch() {
+      if (!debouncedQuery) {
+        if (isMounted) setProducts([]);
+        return;
+      }
+
       setIsLoading(true);
 
       try {
@@ -45,6 +57,8 @@ export function SearchBar() {
         if (isMounted) {
           setProducts(response.results.slice(0, 4));
         }
+      } catch (error) {
+        console.error("Search failed", error);
       } finally {
         if (isMounted) {
           setIsLoading(false);
@@ -67,6 +81,19 @@ export function SearchBar() {
     );
   }, [query]);
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && query.trim()) {
+      setIsFocused(false);
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
+  const handleKeywordClick = (keyword: string) => {
+    setQuery(keyword);
+    setIsFocused(false);
+    router.push(`/search?q=${encodeURIComponent(keyword)}`);
+  };
+
   return (
     <>
       <div
@@ -85,18 +112,19 @@ export function SearchBar() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               onFocus={() => setIsFocused(true)}
+              onKeyDown={handleKeyDown}
               placeholder="Search magnetic keyboards, espresso machines, processors..."
               className="h-14 w-full bg-transparent text-[15px] text-zinc-950 outline-none placeholder:text-zinc-400"
             />
 
             <kbd className="hidden rounded-md border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs text-zinc-400 sm:block">
-              Ctrl K
+              Enter ↵
             </kbd>
           </div>
         </div>
 
         {shouldShowDropdown ? (
-          <div className="absolute left-0 right-0 top-[calc(100%+12px)] overflow-hidden rounded-2xl border border-zinc-200/70 bg-white/95 backdrop-blur-xl">
+          <div className="absolute left-0 right-0 top-[calc(100%+12px)] overflow-hidden rounded-2xl border border-zinc-200/70 bg-white/95 backdrop-blur-xl shadow-xl">
             <div className="grid gap-0 md:grid-cols-[0.9fr_1.4fr]">
               <div className="border-b border-zinc-200/60 p-4 md:border-b-0 md:border-r">
                 <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
@@ -108,7 +136,7 @@ export function SearchBar() {
                     <button
                       key={keyword}
                       type="button"
-                      onClick={() => setQuery(keyword)}
+                      onClick={() => handleKeywordClick(keyword)}
                       className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm text-zinc-700 transition-colors hover:bg-zinc-100"
                     >
                       <span>{keyword}</span>
@@ -131,14 +159,15 @@ export function SearchBar() {
 
                 <div className="space-y-2">
                   {products.map((product) => (
-                    <button
+                    <Link
                       key={product.id}
-                      type="button"
+                      href={`/product/${product.id}`}
+                      onClick={() => setIsFocused(false)}
                       className="flex w-full items-center gap-3 rounded-xl p-2 text-left transition-colors hover:bg-zinc-100"
                     >
                       <Image
-                        src={product.image}
-                        alt={product.title}
+                        src={product.image_url || FALLBACK_IMAGE}
+                        alt={product.title || "Product Image"}
                         width={56}
                         height={56}
                         sizes="56px"
@@ -147,18 +176,18 @@ export function SearchBar() {
 
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium text-zinc-800">
-                          {product.title}
+                          {product.title || "Unnamed Product"}
                         </p>
-                        <p className="text-xs text-zinc-400">{product.category}</p>
+                        <p className="text-xs text-zinc-400">{product.category || "General"}</p>
                       </div>
 
                       <p className="text-sm font-semibold text-zinc-950">
-                        {formatPrice(product.price, product.currency)}
+                        {formatPrice(product.price || 0, product.currency)}
                       </p>
-                    </button>
+                    </Link>
                   ))}
 
-                  {!isLoading && products.length === 0 ? (
+                  {!isLoading && query && products.length === 0 ? (
                     <div className="rounded-xl bg-zinc-50 p-6 text-center text-sm text-zinc-400">
                       No products found.
                     </div>

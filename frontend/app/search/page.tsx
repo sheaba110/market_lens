@@ -8,11 +8,12 @@ import {
   useRange, 
   useInstantSearch, 
   useClearRefinements,
-  useCurrentRefinements
+  useCurrentRefinements,
+  SortBy 
 } from "react-instantsearch";
-import { searchClient } from "@/lib/meilisearch"; // تأكد من مسار ملف الإعدادات
+import { searchClient } from "@/lib/meilisearch";
 import { ProductCard } from "@/components/product/ProductCard";
-import { SearchBar } from "@/components/search/SearchBar"; // تأكد إن SearchBar بيستخدم useSearchBox
+import { SearchBar } from "@/components/search/SearchBar";
 import type { Product } from "@/lib/types/product";
 
 // --- Skeletons ---
@@ -72,7 +73,6 @@ function PriceFilter({ attribute }: { attribute: string }) {
   const { range, start, refine } = useRange({ attribute });
   const min = range.min !== undefined ? range.min : 100;
   const max = range.max !== undefined ? range.max : 1500;
-  // بناخد القيمة الحالية، لو مفيش بناخد أقصى قيمة
   const currentValue = start[1] !== -Infinity && start[1] !== undefined ? start[1] : max;
 
   return (
@@ -103,7 +103,6 @@ function PriceFilter({ attribute }: { attribute: string }) {
 }
 
 // --- Main Content Wrapper ---
-// فصلناه في Component لوحده عشان الـ Hooks لازم تشتغل جوا الـ InstantSearch Provider
 function SearchPageContent() {
   const { hits } = useHits();
   const { status, results } = useInstantSearch();
@@ -113,7 +112,6 @@ function SearchPageContent() {
   const isLoading = status === "loading" || status === "stalled";
   const nbHits = results?.nbHits || 0;
   
-  // بنحسب عدد الفلاتر النشطة بناءً على Meilisearch state
   const activeFilterCount = currentRefinements.reduce(
     (acc, curr) => acc + curr.refinements.length,
     0
@@ -139,7 +137,6 @@ function SearchPageContent() {
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-8 px-4 pb-20 lg:grid-cols-[280px_1fr]">
-        {/* السايد بار بتاع الفلاتر */}
         <aside className="h-fit rounded-2xl border border-zinc-200/60 bg-white p-5 lg:sticky lg:top-6">
           <div className="mb-6 flex items-center justify-between">
             <div>
@@ -156,20 +153,31 @@ function SearchPageContent() {
           </div>
 
           <div className="space-y-7">
-            {/* لاحظ هنا attribute هو اسم الحقل في الـ Database بتاعتك */}
-            <FilterPills attribute="category" title="Category" />
-            <FilterPills attribute="tags" title="Attributes" />
+            {}
+            {/* <FilterPills attribute="vendor" title="Vendor" /> */}
             <PriceFilter attribute="price" />
           </div>
         </aside>
 
-        {/* عرض النتائج */}
         <div>
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
               <h2 className="text-lg font-semibold text-zinc-950">Product Discovery</h2>
               <p className="mt-1 text-sm text-zinc-400">{resultLabel}</p>
             </div>
+
+            {}
+            <SortBy
+              items={[
+                { label: 'Relevance', value: 'products' },
+                { label: 'Price: Low to High', value: 'products:price:asc' },
+                { label: 'Price: High to Low', value: 'products:price:desc' },
+              ]}
+              classNames={{
+                root: 'relative',
+                select: 'rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-300 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer',
+              }}
+            />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -201,7 +209,6 @@ function SearchPageContent() {
 // --- Main Export ---
 export default function SearchPage() {
   return (
-    // هنا بتبدأ رحلة البحث، indexName هو اسم الـ index في Meilisearch
     <InstantSearch indexName="products" searchClient={searchClient}>
       <SearchPageContent />
     </InstantSearch>
