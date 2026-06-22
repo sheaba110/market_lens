@@ -20,10 +20,9 @@ class BadrgrbSpider(scrapy.Spider):
     name = "badrgrb"
     allowed_domains = ["elbadrgroupeg.store"]
 
-    def start_requests(self):
+    async def start(self):
         urls = [
             "https://elbadrgroupeg.store/index.php?route=product/catalog",
-            "https://elbadrgroupeg.store/index.php?route=product/special",
         ]
         for url in urls:
             yield scrapy.Request(
@@ -32,7 +31,13 @@ class BadrgrbSpider(scrapy.Spider):
                 meta={
                     "playwright": True,
                     "playwright_page_methods": [
-                        PageMethod("wait_for_selector", "div.main-products"),
+                        PageMethod("wait_for_timeout", 5000),
+                        PageMethod(
+                            "screenshot", path="debug_docker_page.png", full_page=True
+                        ),
+                        PageMethod(
+                            "wait_for_selector", "div.main-products", timeout=60000
+                        ),
                     ],
                     "playwright_context": "default",
                 },
@@ -43,7 +48,9 @@ class BadrgrbSpider(scrapy.Spider):
         for product in items:
             l = ItemLoader(item=ItemsCrawler(), selector=product)
             l.add_css("title", "div.name a::text")
-            l.add_css("image", "img.img-responsive::attr(src)", MapCompose(response.urljoin))
+            l.add_css(
+                "image", "img.img-responsive::attr(src)", MapCompose(response.urljoin)
+            )
             l.add_css("url", "a::attr(href)", MapCompose(response.urljoin))
             l.add_value("vendor", "elbadr-group")
             l.add_css("price", "div.price *::text", MapCompose(extract_price_number))

@@ -75,7 +75,7 @@ services:
       - ./backend:/backend:ro
     networks:
       - market_lens_network
-    restart: always
+    restart: "no"
 
   search_engine:
     image: 'getmeili/meilisearch:v1.7.0'
