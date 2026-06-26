@@ -1,23 +1,20 @@
 name: market-lens-backend
+
 services:
   web:
+    image: market_lens_web:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: django
     env_file:
       - .env
+    working_dir: /app
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/app
-    working_dir: /app
-    command: python manage.py runserver 0.0.0.0:8000
-    depends_on:
-      database:
-        condition: service_healthy
-      search_engine:
-        condition: service_healthy
     environment:
       - POSTGRES_HOST=database
       - POSTGRES_PORT=5432
@@ -25,36 +22,64 @@ services:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - DEBUG=${DEBUG}
+      - DATABASE_URL=${DATABASE_URL}
       - MEILI_URL=${MEILI_URL}
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
-      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      database:
+        condition: service_healthy
+      search_engine:
+        condition: service_healthy
     networks:
       - market_lens_network
-    restart: always
+    restart: on-failure
 
   database:
-    image: 'postgres:15-alpine'
+    image: postgres:15-alpine
+    container_name: market_lens_db
     env_file:
       - .env
-    container_name: market_lens_db
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes:
+      - database_data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}" ]
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
       interval: 10s
       timeout: 5s
       retries: 6
-    volumes:
-      - database_data:/var/lib/postgresql/data
     networks:
       - market_lens_network
-    restart: always
+    restart: on-failure
+
+  search_engine:
+    image: getmeili/meilisearch:v1.7.0
+    container_name: market_lens_meilisearch
+    env_file:
+      - .env
+    ports:
+      - "7700:7700"
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+      - MEILI_ENV=development
+    volumes:
+      - meili_data:/meili_data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7700/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - market_lens_network
+    restart: on-failure
 
   offer_crawler:
+    image: market_lens_offer_crawler:latest
     build:
       context: .
       dockerfile: offer_crawler/Dockerfile
@@ -63,41 +88,69 @@ services:
       - .env
     working_dir: /app
     command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
-    depends_on:
-      database:
-        condition: service_healthy
-      search_engine:
-        condition: service_healthy
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
       - ./offer_crawler:/app
       - ./backend:/backend:ro
+    depends_on:
+      database:
+        condition: service_healthy
+      search_engine:
+        condition: service_healthy
     networks:
       - market_lens_network
     restart: "no"
 
-  search_engine:
-    image: 'getmeili/meilisearch:v1.7.0'
+  indexer:
+    image: market_lens_web:latest
+    container_name: market_lens_indexer
     env_file:
       - .env
-    container_name: market_lens_meilisearch
-    ports:
-      - "7700:7700"
-    volumes:
-      - ./meili_data:/meili_data
+    working_dir: /app
+    command: python scripts/indexer.py
     environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - MEILI_URL=${MEILI_URL}
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
-      - MEILI_ENV=development
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:7700/health" ]
-      interval: 30s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
+    volumes:
+      - ./backend:/app
+    depends_on:
+      database:
+        condition: service_healthy
+      search_engine:
+        condition: service_healthy
     networks:
       - market_lens_network
-    restart: always
+    restart: "no"
+
+  frontend:
+    image: market_lens_frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: market_lens_frontend
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    depends_on:
+      web:
+        condition: service_healthy
+      search_engine:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - market_lens_network
+    restart: on-failure
 
 volumes:
   database_data:

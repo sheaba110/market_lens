@@ -9,11 +9,9 @@ import { useDebounce } from "@/lib/hooks/useDebounce";
 import type { Product } from "@/lib/types/product";
 
 const trendingKeywords = [
-  "Magnetic keyboards",
-  "Studio monitors",
-  "Espresso machines",
-  "Noise cancelling",
-  "Desktop processors",
+  "PC Components",
+  "Laptops",
+  "Accessories",
 ];
 
 const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=1200&auto=format&fit=crop";
@@ -104,7 +102,7 @@ export function SearchBar() {
       />
 
       <div className="relative z-20 mx-auto w-full max-w-3xl">
-        <div className="rounded-2xl border border-zinc-200/70 bg-white/90 p-2 backdrop-blur-xl transition-all duration-300 focus-within:border-zinc-300 focus-within:bg-white">
+        <div className="rounded-2xl border border-zinc-190/70 bg-white/90 p-1 backdrop-blur-xl transition-all duration-200 focus-within:border-zinc-400 focus-within:bg-white">
           <div className="flex items-center gap-3 px-4">
             <div className="h-2 w-2 rounded-full bg-zinc-950" />
 
@@ -113,12 +111,12 @@ export function SearchBar() {
               onChange={(event) => setQuery(event.target.value)}
               onFocus={() => setIsFocused(true)}
               onKeyDown={handleKeyDown}
-              placeholder="Search magnetic keyboards, espresso machines, processors..."
-              className="h-14 w-full bg-transparent text-[15px] text-zinc-950 outline-none placeholder:text-zinc-400"
+              placeholder="Search RTX 3080, Intel Core i7, AMD Ryzen 9 ..."
+              className="h-11 w-full bg-transparent text-[16px] text-zinc-950 outline-none placeholder:text-zinc-500"
             />
 
-            <kbd className="hidden rounded-md border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs text-zinc-400 sm:block">
-              Enter ↵
+            <kbd className="hidden rounded-md border border-zinc-200 bg-zinc-50 px-3 py-0.5 text-xs text-black sm:block hover:bg-zinc-900 hover:text-white">
+              Search ↵
             </kbd>
           </div>
         </div>

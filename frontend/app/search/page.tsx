@@ -10,7 +10,9 @@ import {
   useClearRefinements,
   useCurrentRefinements,
   SortBy 
-} from "react-instantsearch";
+} 
+
+from "react-instantsearch";
 import { searchClient } from "@/lib/meilisearch";
 import { ProductCard } from "@/components/product/ProductCard";
 import { SearchBar } from "@/components/search/SearchBar";
@@ -175,7 +177,7 @@ function SearchPageContent() {
               ]}
               classNames={{
                 root: 'relative',
-                select: 'rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-300 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer',
+                select: 'rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer',
               }}
             />
           </div>

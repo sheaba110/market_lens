@@ -17,11 +17,23 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'sigma-computer.com', 
+        hostname: 'www.sigma-computer.com', 
       },
       {
         protocol: 'https',
         hostname: 'alfrensia.com', 
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.alfrensia.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.elbadrgroupeg.store',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.hardwaremarket.net',
       },
     ],
   },

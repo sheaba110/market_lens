@@ -21,8 +21,12 @@ const collections = [
   "Processors",
   "Graphic cards",
   "Displays",
-  "Workspace",
-  "Home Setup",
+  "Motherboards",
+  "Memory",
+  "Storage",
+  "Power supplies",
+  "Cases",
+  "Cooling",
 ];
 
 const features = [
@@ -51,17 +55,17 @@ export default function Home() {
 
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 pt-6 sm:px-6 lg:px-8">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-400">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-black-400">
             MarketLens
           </p>
-          <p className="mt-1 text-sm text-zinc-500">
+          <p className="mt-1 text-sm text-black-500">
             Product discovery, sharpened.
           </p>
         </div>
 
         <Link
           href="/search"
-       className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:border-zinc-300 hover:text-zinc-950"
+       className="rounded-full border border-white bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800"
         >
           Open Search
         </Link>
@@ -69,8 +73,8 @@ export default function Home() {
 
       <section className="mx-auto grid w-full max-w-7xl gap-14 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:pt-24">
         <div className="max-w-3xl">
-          <p className="mb-5 inline-flex items-center rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium uppercase tracking-[0.22em] text-zinc-500 shadow-sm">
-            Home for product discovery
+          <p className="mb-5 inline-flex items-center rounded-full border border-zinc-300 bg-white px-3 py-1 text-xs font-semibold tracking-[0.22em] text-zinc-500 shadow-sm">
+            Home for Product Discovery
           </p>
 
           <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-zinc-950 sm:text-6xl lg:text-7xl">
@@ -101,8 +105,8 @@ export default function Home() {
 
         <div className="grid gap-4 self-start">
           <div className="rounded-[28px] border border-zinc-200/70 bg-white p-6 shadow-[0_20px_60px_rgba(24,24,27,0.08)]">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400">
-              At a glance
+            <p className="text-xs font-semibold tracking-[0.2em] text-zinc-500">
+              At a Glance
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
               {highlights.map((item) => (
@@ -122,8 +126,8 @@ export default function Home() {
           </div>
 
           <div className="rounded-[28px] border border-zinc-200/70 bg-zinc-950 p-6 text-white shadow-[0_20px_60px_rgba(24,24,27,0.18)]">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-400">
-              Why it works
+            <p className="text-xs font-semibold tracking-[0.2em] text-zinc-400">
+              Why it Works
             </p>
             <div className="mt-5 space-y-4">
               {features.map((feature) => (
@@ -146,8 +150,8 @@ export default function Home() {
         <div className="rounded-[32px] border border-zinc-200/70 bg-white p-8 shadow-[0_24px_80px_rgba(24,24,27,0.06)] lg:p-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-xs font-medium uppercase tracking-[0.22em] text-zinc-400">
-                Discovery flow
+              <p className="text-xs font-semibold tracking-[0.22em] text-zinc-500">
+                Discovery Flow
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
                 Start broad on the homepage, then narrow down when the intent is
