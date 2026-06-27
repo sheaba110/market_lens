@@ -8,17 +8,13 @@ import { searchProducts } from "@/lib/api/products";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 import type { Product } from "@/lib/types/product";
 
-const trendingKeywords = [
-  "PC Components",
-  "Laptops",
-  "Accessories",
-];
+const trendingKeywords = ["PC Components", "Laptops", "Accessories"];
 
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=1200&auto=format&fit=crop";
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=1200&auto=format&fit=crop";
 
 function formatPrice(price: number, currency?: string) {
   const safeCurrency = currency || "EGP";
-  
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: safeCurrency,
@@ -26,7 +22,11 @@ function formatPrice(price: number, currency?: string) {
   }).format(price);
 }
 
-export function SearchBar() {
+interface SearchBarProps {
+  onRefine?: (value: string) => void;
+}
+
+export function SearchBar({ onRefine }: SearchBarProps) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -44,38 +44,25 @@ export function SearchBar() {
         if (isMounted) setProducts([]);
         return;
       }
-
       setIsLoading(true);
-
       try {
-        const response = await searchProducts({
-          query: debouncedQuery,
-        });
-
-        if (isMounted) {
-          setProducts(response.results.slice(0, 4));
-        }
+        const response = await searchProducts({ query: debouncedQuery });
+        if (isMounted) setProducts(response.results.slice(0, 4));
       } catch (error) {
         console.error("Search failed", error);
       } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+        if (isMounted) setIsLoading(false);
       }
     }
 
     runSearch();
-
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false; };
   }, [debouncedQuery]);
 
   const visibleKeywords = useMemo(() => {
     if (!query) return trendingKeywords;
-
     return trendingKeywords.filter((keyword) =>
-      keyword.toLowerCase().includes(query.toLowerCase()),
+      keyword.toLowerCase().includes(query.toLowerCase())
     );
   }, [query]);
 
@@ -108,7 +95,11 @@ export function SearchBar() {
 
             <input
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                const value = event.target.value;
+                setQuery(value);
+                onRefine?.(value); 
+              }}
               onFocus={() => setIsFocused(true)}
               onKeyDown={handleKeyDown}
               placeholder="Search RTX 3080, Intel Core i7, AMD Ryzen 9 ..."
@@ -128,7 +119,6 @@ export function SearchBar() {
                 <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
                   Trending
                 </p>
-
                 <div className="space-y-1">
                   {visibleKeywords.map((keyword) => (
                     <button
@@ -149,7 +139,6 @@ export function SearchBar() {
                   <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
                     Products
                   </p>
-
                   {isLoading ? (
                     <p className="text-xs text-zinc-400">Searching</p>
                   ) : null}
@@ -171,14 +160,14 @@ export function SearchBar() {
                         sizes="56px"
                         className="h-14 w-14 rounded-lg object-cover"
                       />
-
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium text-zinc-800">
                           {product.title || "Unnamed Product"}
                         </p>
-                        <p className="text-xs text-zinc-400">{product.category || "General"}</p>
+                        <p className="text-xs text-zinc-400">
+                          {product.category || "General"}
+                        </p>
                       </div>
-
                       <p className="text-sm font-semibold text-zinc-950">
                         {formatPrice(product.price || 0, product.currency)}
                       </p>

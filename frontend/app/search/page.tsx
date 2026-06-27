@@ -1,24 +1,28 @@
 ﻿"use client";
 
 import { useMemo } from "react";
-import { 
-  InstantSearch, 
-  useHits, 
-  useRefinementList, 
-  useRange, 
-  useInstantSearch, 
+import {
+  InstantSearch,
+  useHits,
+  useRefinementList,
+  useRange,
+  useInstantSearch,
   useClearRefinements,
   useCurrentRefinements,
-  SortBy 
-} 
-
-from "react-instantsearch";
+  useSearchBox,
+  SortBy
+} from "react-instantsearch";
 import { searchClient } from "@/lib/meilisearch";
 import { ProductCard } from "@/components/product/ProductCard";
 import { SearchBar } from "@/components/search/SearchBar";
 import type { Product } from "@/lib/types/product";
 
-// --- Skeletons ---
+
+function ConnectedSearchBar() {
+  const { refine } = useSearchBox();
+  return <SearchBar onRefine={refine} />;
+}
+
 function ProductCardSkeleton() {
   return (
     <div className="overflow-hidden rounded-2xl border border-zinc-200/60 bg-white">
@@ -40,7 +44,6 @@ function ProductCardSkeleton() {
   );
 }
 
-// --- Custom Filter Components ---
 function FilterPills({ attribute, title }: { attribute: string; title: string }) {
   const { items, refine } = useRefinementList({ attribute });
 
@@ -85,7 +88,6 @@ function PriceFilter({ attribute }: { attribute: string }) {
         </p>
         <p className="text-xs font-semibold text-zinc-950">Up to ${currentValue}</p>
       </div>
-
       <input
         type="range"
         min={min}
@@ -95,7 +97,6 @@ function PriceFilter({ attribute }: { attribute: string }) {
         onChange={(event) => refine([min, Number(event.target.value)])}
         className="h-1 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-zinc-950"
       />
-
       <div className="mt-2 flex justify-between text-[11px] text-zinc-400">
         <span>${min}</span>
         <span>${max}</span>
@@ -104,7 +105,6 @@ function PriceFilter({ attribute }: { attribute: string }) {
   );
 }
 
-// --- Main Content Wrapper ---
 function SearchPageContent() {
   const { hits } = useHits();
   const { status, results } = useInstantSearch();
@@ -113,7 +113,7 @@ function SearchPageContent() {
 
   const isLoading = status === "loading" || status === "stalled";
   const nbHits = results?.nbHits || 0;
-  
+
   const activeFilterCount = currentRefinements.reduce(
     (acc, curr) => acc + curr.refinements.length,
     0
@@ -135,7 +135,7 @@ function SearchPageContent() {
             Find the right product before the page finishes blinking.
           </h1>
         </div>
-        <SearchBar />
+        <ConnectedSearchBar />
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-8 px-4 pb-20 lg:grid-cols-[280px_1fr]">
@@ -153,9 +153,7 @@ function SearchPageContent() {
               Reset
             </button>
           </div>
-
           <div className="space-y-7">
-            {}
             {/* <FilterPills attribute="vendor" title="Vendor" /> */}
             <PriceFilter attribute="price" />
           </div>
@@ -167,17 +165,16 @@ function SearchPageContent() {
               <h2 className="text-lg font-semibold text-zinc-950">Product Discovery</h2>
               <p className="mt-1 text-sm text-zinc-400">{resultLabel}</p>
             </div>
-
-            {}
             <SortBy
               items={[
-                { label: 'Relevance', value: 'products' },
-                { label: 'Price: Low to High', value: 'products:price:asc' },
-                { label: 'Price: High to Low', value: 'products:price:desc' },
+                { label: "Relevance", value: "products" },
+                { label: "Price: Low to High", value: "products:price:asc" },
+                { label: "Price: High to Low", value: "products:price:desc" },
               ]}
               classNames={{
-                root: 'relative',
-                select: 'rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer',
+                root: "relative",
+                select:
+                  "rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer",
               }}
             />
           </div>
@@ -208,10 +205,25 @@ function SearchPageContent() {
   );
 }
 
-// --- Main Export ---
 export default function SearchPage() {
   return (
-    <InstantSearch indexName="products" searchClient={searchClient}>
+    <InstantSearch
+      indexName="products"
+      searchClient={searchClient}
+      routing={{
+        stateMapping: {
+          stateToRoute(uiState) {
+            const indexUiState = uiState["products"] || {};
+            return { q: indexUiState.query };
+          },
+          routeToState(routeState) {
+            return {
+              products: { query: routeState.q || "" },
+            };
+          },
+        },
+      }}
+    >
       <SearchPageContent />
     </InstantSearch>
   );
