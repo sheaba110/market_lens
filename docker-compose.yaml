@@ -1,8 +1,8 @@
-name: market-lens-backend
+name: market-lens
 
 services:
   web:
-    image: market_lens_web:latest
+    image: market_lens_backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -103,7 +103,7 @@ services:
     restart: "no"
 
   indexer:
-    image: market_lens_web:latest
+    image: market_lens_backend:latest
     container_name: market_lens_indexer
     env_file:
       - .env
