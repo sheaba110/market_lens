@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: "standalone",
   images: {
     remotePatterns: [
       {
@@ -17,7 +18,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.sigma-computer.com', 
+        hostname: 'sigma-computer.com', 
       },
       {
         protocol: 'https',
@@ -25,18 +26,18 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.alfrensia.com',
+        hostname: 'alfrensia.com',
       },
       {
         protocol: 'https',
-        hostname: 'www.elbadrgroupeg.store',
+        hostname: 'elbadrgroupeg.store',
       },
       {
         protocol: 'https',
-        hostname: 'www.hardwaremarket.net',
+        hostname: 'hardwaremarket.net',
       },
     ],
   },
 };
 
-export default nextConfig;
+export default nextConfig;  

@@ -69,7 +69,6 @@ class DashboardProfileView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all() # type: ignore
     
     def get_object(self):
-        # السطر ده بيحل كل مشاكل الـ Queryset والـ URL والـ Lookup
         return self.request.user.profile # type: ignore
 
 

@@ -31,10 +31,6 @@ ecdsa==0.19.2
 email-validator==2.3.0
 exceptiongroup==1.3.1
 executing==2.2.1
-fastapi==0.135.3
-fastapi-cli==0.0.24
-fastapi-cloud-cli==0.15.1
-fastar==0.8.0
 filelock==3.20.3
 greenlet==3.3.1
 h11==0.16.0

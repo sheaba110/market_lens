@@ -10,7 +10,8 @@ import {
   useClearRefinements,
   useCurrentRefinements,
   useSearchBox,
-  SortBy
+  SortBy,
+  Pagination,
 } from "react-instantsearch";
 import { searchClient } from "@/lib/meilisearch";
 import { ProductCard } from "@/components/product/ProductCard";
@@ -60,11 +61,10 @@ function FilterPills({ attribute, title }: { attribute: string; title: string })
             key={item.value}
             type="button"
             onClick={() => refine(item.value)}
-            className={`rounded-full border px-3 py-2 text-xs font-medium transition-all ${
-              item.isRefined
-                ? "border-zinc-950 bg-zinc-950 text-white"
-                : "border-zinc-200 bg-white text-zinc-500 hover:border-zinc-300 hover:text-zinc-950"
-            }`}
+            className={`rounded-full border px-3 py-2 text-xs font-medium transition-all ${item.isRefined
+              ? "border-zinc-950 bg-zinc-950 text-white"
+              : "border-zinc-200 bg-white text-zinc-500 hover:border-zinc-300 hover:text-zinc-950"
+              }`}
           >
             {item.label}
           </button>
@@ -125,83 +125,105 @@ function SearchPageContent() {
   }, [isLoading, nbHits]);
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA] text-zinc-950">
-      <section className="mx-auto flex min-h-[42vh] max-w-6xl flex-col items-center justify-center px-4 py-20">
-        <div className="mb-8 text-center">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.22em] text-zinc-400">
-            Decoupled Commerce Search
-          </p>
-          <h1 className="mx-auto max-w-3xl text-4xl font-semibold tracking-normal text-zinc-950 sm:text-5xl">
-            Find the right product before the page finishes blinking.
-          </h1>
-        </div>
-        <ConnectedSearchBar />
-      </section>
+    <>
 
-      <section className="mx-auto grid max-w-7xl gap-8 px-4 pb-20 lg:grid-cols-[280px_1fr]">
-        <aside className="h-fit rounded-2xl border border-zinc-200/60 bg-white p-5 lg:sticky lg:top-6">
-          <div className="mb-6 flex items-center justify-between">
-            <div>
-              <h2 className="text-sm font-semibold text-zinc-950">Filters</h2>
-              <p className="mt-1 text-xs text-zinc-400">{activeFilterCount} active</p>
+      <main className="min-h-screen bg-[#FAFAFA] text-zinc-950">
+        <section className="mx-auto flex min-h-[42vh] max-w-6xl flex-col items-center justify-center px-4 py-20">
+          <div className="mb-8 text-center">
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.22em] text-zinc-400">
+              Decoupled Commerce Search
+            </p>
+            <h1 className="mx-auto max-w-3xl text-4xl font-semibold tracking-normal text-zinc-950 sm:text-5xl">
+              Find the right product before the page finishes blinking.
+            </h1>
+          </div>
+          <ConnectedSearchBar />
+        </section>
+
+        <section className="mx-auto grid max-w-7xl gap-8 px-4 pb-20 lg:grid-cols-[280px_1fr]">
+          <aside className="h-fit rounded-2xl border border-zinc-200/60 bg-white p-5 lg:sticky lg:top-6">
+            <div className="mb-6 flex items-center justify-between">
+              <div>
+                <h2 className="text-sm font-semibold text-zinc-950">Filters</h2>
+                <p className="mt-1 text-xs text-zinc-400">{activeFilterCount} active</p>
+              </div>
+              <button
+                type="button"
+                onClick={clearAll}
+                className="rounded-full border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:border-zinc-300 hover:text-zinc-950"
+              >
+                Reset
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={clearAll}
-              className="rounded-full border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:border-zinc-300 hover:text-zinc-950"
-            >
-              Reset
-            </button>
-          </div>
-          <div className="space-y-7">
-            {/* <FilterPills attribute="vendor" title="Vendor" /> */}
-            <PriceFilter attribute="price" />
-          </div>
-        </aside>
-
-        <div>
-          <div className="mb-5 flex items-end justify-between gap-4">
-            <div>
-              <h2 className="text-lg font-semibold text-zinc-950">Product Discovery</h2>
-              <p className="mt-1 text-sm text-zinc-400">{resultLabel}</p>
+            <div className="space-y-7">
+              {/* <FilterPills attribute="vendor" title="Vendor" /> */}
+              <PriceFilter attribute="price" />
             </div>
-            <SortBy
-              items={[
-                { label: "Relevance", value: "products" },
-                { label: "Price: Low to High", value: "products:price:asc" },
-                { label: "Price: High to Low", value: "products:price:desc" },
-              ]}
-              classNames={{
-                root: "relative",
-                select:
-                  "rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer",
-              }}
-            />
-          </div>
+          </aside>
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {isLoading
-              ? Array.from({ length: 6 }).map((_, index) => (
+          <div>
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-semibold text-zinc-950">Product Discovery</h2>
+                <p className="mt-1 text-sm text-zinc-400">{resultLabel}</p>
+              </div>
+              {/* <SortBy
+                items={[
+                  { label: "Relevance", value: "products" },
+                  { label: "Price: Low to High", value: "products:price:asc" },
+                  { label: "Price: High to Low", value: "products:price:desc" },
+                ]}
+                classNames={{
+                  root: "relative",
+                  select:
+                    "rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer",
+                }}
+              /> */}
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {isLoading
+                ? Array.from({ length: 6 }).map((_, index) => (
                   <ProductCardSkeleton key={index} />
                 ))
-              : hits.map((hit) => (
+                : hits.map((hit) => (
                   <ProductCard key={hit.id} product={hit as unknown as Product} />
                 ))}
-          </div>
-
-          {!isLoading && hits.length === 0 && (
-            <div className="mt-6 rounded-2xl border border-zinc-200/60 bg-white p-12 text-center">
-              <p className="text-sm font-medium text-zinc-950">
-                No products matched this refinement.
-              </p>
-              <p className="mt-2 text-sm text-zinc-400">
-                Try removing a filter or increasing the price range.
-              </p>
             </div>
-          )}
-        </div>
-      </section>
-    </main>
+            {!isLoading && (
+              <div className="mt-10 flex justify-center">
+                <Pagination
+                  classNames={{
+                    root: "",
+                    list: "flex items-center gap-2",
+                    item:
+                      "flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 bg-white text-sm transition hover:border-zinc-950",
+                    selectedItem:
+                      "!bg-zinc-950 !text-white border-zinc-950",
+                    disabledItem:
+                      "pointer-events-none opacity-40",
+                    previousPageItem:
+                      "flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200",
+                    nextPageItem:
+                      "flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200",
+                  }}
+                />
+              </div>
+            )}
+            {!isLoading && hits.length === 0 && (
+              <div className="mt-6 rounded-2xl border border-zinc-200/60 bg-white p-12 text-center">
+                <p className="text-sm font-medium text-zinc-950">
+                  No products matched this refinement.
+                </p>
+                <p className="mt-2 text-sm text-zinc-400">
+                  Try removing a filter or increasing the price range.
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
 
@@ -210,19 +232,6 @@ export default function SearchPage() {
     <InstantSearch
       indexName="products"
       searchClient={searchClient}
-      routing={{
-        stateMapping: {
-          stateToRoute(uiState) {
-            const indexUiState = uiState["products"] || {};
-            return { q: indexUiState.query };
-          },
-          routeToState(routeState) {
-            return {
-              products: { query: routeState.q || "" },
-            };
-          },
-        },
-      }}
     >
       <SearchPageContent />
     </InstantSearch>

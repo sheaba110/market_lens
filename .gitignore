@@ -165,3 +165,5 @@ meilisearch.log
 dumps/
 # Meilisearch executable
 meilisearch.exe
+
+.yaml
