@@ -34,7 +34,6 @@ class HardwaremarketNetSpider(scrapy.Spider):
                 "playwright": True,
                 "playwright_context": "default",
                 "playwright_page_methods": [
-                    # PageMethod("wait_for_load_state", "networkidle"),
                     PageMethod(
                         "evaluate", infinite_scroll
                     ),
@@ -60,10 +59,7 @@ class HardwaremarketNetSpider(scrapy.Spider):
             loader = ItemLoader(item=ItemsCrawler(), selector=product)
 
             loader.add_css(
-                "image",
-                "div.wd-product-wrapper img::attr(data-src), "
-                "div.wd-product-wrapper img::attr(src)",
-            )
+                "image", "div.wd-product-wrapper img::attr(data-src)",)
 
             loader.add_css("title", "h3.wd-entities-title a::text")
 
