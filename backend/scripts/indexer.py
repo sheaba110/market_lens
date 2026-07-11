@@ -12,8 +12,8 @@ PG_HOST = os.getenv("DATABASE_HOST")
 PG_PORT = os.getenv("DATABASE_PORT")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-MEILI_URL = os.getenv("MEILI_URL") or os.getenv("MEILI_HOST", "http://search_engine:7700")
-MEILI_MASTER_KEY = os.getenv("MEILI_MASTER_KEY")
+MEILI_URL = os.getenv("MEILI_URL") or os.getenv("NEXT_PUBLIC_MEILI_URL", "http://search_engine:7700")
+MEILI_MASTER_KEY = os.getenv("MEILI_MASTER_KEY") or os.getenv("NEXT_PUBLIC_MEILI_SEARCH_KEY")
 
 
 def get_db_connection():

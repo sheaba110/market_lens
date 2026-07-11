@@ -1,4 +1,4 @@
-name: market-lens
+name: market_lens
 
 services:
   web:
@@ -23,8 +23,8 @@ services:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - DEBUG=${DEBUG}
       - DATABASE_URL=${DATABASE_URL}
-      - MEILI_URL=${MEILI_URL}
-      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+      - NEXT_PUBLIC_MEILISEARCH_HOST=${NEXT_PUBLIC_MEILISEARCH_HOST}
+      - NEXT_PUBLIC_MEILISEARCH_API_KEY=${NEXT_PUBLIC_MEILISEARCH_API_KEY}
     depends_on:
       database:
         condition: service_healthy
@@ -48,7 +48,7 @@ services:
     volumes:
       - database_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}" ]
       interval: 10s
       timeout: 5s
       retries: 6
@@ -64,12 +64,12 @@ services:
     ports:
       - "7700:7700"
     environment:
-      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+      - NEXT_PUBLIC_MEILISEARCH_API_KEY=${MEILI_MASTER_KEY}
       - MEILI_ENV=development
     volumes:
       - meili_data:/meili_data
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7700/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:7700/health" ]
       interval: 30s
       timeout: 5s
       retries: 5
@@ -112,8 +112,8 @@ services:
     command: python scripts/indexer.py
     environment:
       - DATABASE_URL=${DATABASE_URL}
-      - MEILI_URL=${MEILI_URL}
-      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+      - NEXT_PUBLIC_MEILISEARCH_HOST=${NEXT_PUBLIC_MEILISEARCH_HOST}
+      - NEXT_PUBLIC_MEILISEARCH_API_KEY=${NEXT_PUBLIC_MEILISEARCH_API_KEY}
     volumes:
       - ./backend:/app
     depends_on:
@@ -130,27 +130,41 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_MEILISEARCH_HOST: ${NEXT_PUBLIC_MEILISEARCH_HOST}
+        NEXT_PUBLIC_MEILISEARCH_API_KEY: ${NEXT_PUBLIC_MEILISEARCH_API_KEY}
+
     container_name: market_lens_frontend
+
     env_file:
       - .env
+
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: 1
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+      NEXT_PUBLIC_MEILISEARCH_HOST: ${NEXT_PUBLIC_MEILISEARCH_HOST}
+      NEXT_PUBLIC_MEILISEARCH_API_KEY: ${NEXT_PUBLIC_MEILISEARCH_API_KEY}
+
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - NEXT_TELEMETRY_DISABLED=1
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
     depends_on:
       web:
         condition: service_started
       search_engine:
         condition: service_healthy
+
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+      test: [ "CMD-SHELL", "curl -f http://localhost:3000/ || exit 1" ]
       interval: 30s
       timeout: 5s
       retries: 3
+
     networks:
       - market_lens_network
+
     restart: on-failure
 
 volumes:

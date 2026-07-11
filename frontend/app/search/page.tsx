@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import {
   InstantSearch,
   useHits,
@@ -114,6 +114,14 @@ function SearchPageContent() {
   const isLoading = status === "loading" || status === "stalled";
   const nbHits = results?.nbHits || 0;
 
+  // Only show the full skeleton grid on the very first search. After that,
+  // keep the previous hits visible and just dim them — this is what stops
+  // the grid from "blinking" back to skeletons on every refine (typing,
+  // filters, sort, pagination, etc.).
+  const hasLoadedOnce = useRef(false);
+  if (!isLoading) hasLoadedOnce.current = true;
+  const showSkeleton = isLoading && !hasLoadedOnce.current;
+
   const activeFilterCount = currentRefinements.reduce(
     (acc, curr) => acc + curr.refinements.length,
     0
@@ -181,8 +189,11 @@ function SearchPageContent() {
               />
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {isLoading
+            <div
+              className={`grid gap-4 sm:grid-cols-2 xl:grid-cols-3 transition-opacity duration-150 ${isLoading && hasLoadedOnce.current ? "opacity-50" : "opacity-100"
+                }`}
+            >
+              {showSkeleton
                 ? Array.from({ length: 6 }).map((_, index) => (
                   <ProductCardSkeleton key={index} />
                 ))
@@ -190,7 +201,7 @@ function SearchPageContent() {
                   <ProductCard key={hit.id} product={hit as unknown as Product} />
                 ))}
             </div>
-            {!isLoading && (
+            {!showSkeleton && (
               <div className="mt-10 flex justify-center">
                 <Pagination
                   classNames={{

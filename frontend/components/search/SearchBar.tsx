@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -34,6 +34,8 @@ export function SearchBar({ onRefine }: SearchBarProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const debouncedQuery = useDebounce(query, 350);
+
+  // Autocomplete dropdown fetch (separate REST endpoint, unrelated to InstantSearch)
   useEffect(() => {
     let isMounted = true;
 
@@ -45,12 +47,6 @@ export function SearchBar({ onRefine }: SearchBarProps) {
       setIsLoading(true);
       try {
         const response = await searchProducts({ query: debouncedQuery });
-
-        console.log("Query:", debouncedQuery);
-        console.log("Response:", response);
-        console.log("Results:", response.results);
-
-        setProducts(response.results.slice(0, 4));
         if (isMounted) setProducts(response.results.slice(0, 4));
       } catch (error) {
         console.error("Search failed", error);
@@ -61,6 +57,20 @@ export function SearchBar({ onRefine }: SearchBarProps) {
 
     runSearch();
     return () => { isMounted = false; };
+  }, [debouncedQuery]);
+
+  // Keep a ref to the latest onRefine so the effect below only depends on
+  // debouncedQuery. `onRefine` (useSearchBox's `refine`) is not a stable
+  // reference across InstantSearch renders — including it directly in the
+  // dependency array caused an infinite refine -> rerender -> refine loop
+  // that froze the page.
+  const onRefineRef = useRef(onRefine);
+  useEffect(() => {
+    onRefineRef.current = onRefine;
+  });
+
+  useEffect(() => {
+    onRefineRef.current?.(debouncedQuery);
   }, [debouncedQuery]);
 
   const visibleKeywords = useMemo(() => {
@@ -99,9 +109,7 @@ export function SearchBar({ onRefine }: SearchBarProps) {
             <input
               value={query}
               onChange={(event) => {
-                const value = event.target.value;
-                setQuery(value);
-                onRefine?.(value);
+                setQuery(event.target.value);
               }}
               onFocus={() => setIsFocused(true)}
               onKeyDown={handleKeyDown}
