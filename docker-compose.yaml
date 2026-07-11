@@ -87,7 +87,8 @@ services:
     env_file:
       - .env
     working_dir: /app
-    command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
+    command: sh -c "scrapy crawl hardwaremarket"
+    # command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
@@ -138,13 +139,9 @@ services:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
-    volumes:
-      - .:/app
-      - /app/.next
-      - /app/node_modules
     depends_on:
       web:
-        condition: service_healthy
+        condition: service_started
       search_engine:
         condition: service_healthy
     healthcheck:

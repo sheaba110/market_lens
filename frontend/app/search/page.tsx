@@ -167,7 +167,7 @@ function SearchPageContent() {
                 <h2 className="text-lg font-semibold text-zinc-950">Product Discovery</h2>
                 <p className="mt-1 text-sm text-zinc-400">{resultLabel}</p>
               </div>
-              {/* <SortBy
+              <SortBy
                 items={[
                   { label: "Relevance", value: "products" },
                   { label: "Price: Low to High", value: "products:price:asc" },
@@ -178,7 +178,7 @@ function SearchPageContent() {
                   select:
                     "rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-950 focus:outline-none appearance-none cursor-pointer",
                 }}
-              /> */}
+              />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

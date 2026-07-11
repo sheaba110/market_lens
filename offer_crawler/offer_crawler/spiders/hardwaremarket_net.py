@@ -34,7 +34,7 @@ class HardwaremarketNetSpider(scrapy.Spider):
                 "playwright": True,
                 "playwright_context": "default",
                 "playwright_page_methods": [
-                    PageMethod("wait_for_load_state", "networkidle"),
+                    # PageMethod("wait_for_load_state", "networkidle"),
                     PageMethod(
                         "evaluate", infinite_scroll
                     ),

@@ -134,6 +134,7 @@ PLAYWRIGHT_LAUNCH_OPTIONS = {
     "headless": True,
     "timeout": 20 * 1000,
     "args": [
+        "--disable-blink-features=AutomationControlled",
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage", 
