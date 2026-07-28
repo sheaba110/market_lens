@@ -6,7 +6,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: django
+    container_name: market_lens_backend
     env_file:
       - .env
     working_dir: /app
@@ -64,7 +64,7 @@ services:
     ports:
       - "7700:7700"
     environment:
-      - NEXT_PUBLIC_MEILISEARCH_API_KEY=${MEILI_MASTER_KEY}
+      - NEXT_PUBLIC_MEILISEARCH_API_KEY=${NEXT_PUBLIC_MEILISEARCH_API_KEY}
       - MEILI_ENV=development
     volumes:
       - meili_data:/meili_data
@@ -87,8 +87,8 @@ services:
     env_file:
       - .env
     working_dir: /app
-    command: sh -c "scrapy crawl hardwaremarket"
-    # command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
+    # command: sh -c "scrapy crawl hardwaremarket"
+    command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:

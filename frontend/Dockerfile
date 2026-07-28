@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:26-slim AS builder
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm set progress=false && npm config set depth 0
@@ -15,7 +15,7 @@ ENV NEXT_PUBLIC_MEILISEARCH_API_KEY=$NEXT_PUBLIC_MEILISEARCH_API_KEY
 
 RUN npm run build
 
-FROM node:20-alpine AS runner
+FROM node:26-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1

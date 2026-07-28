@@ -45,14 +45,27 @@ infinite_scroll_script = """
     """
 
 
-def extract_price_number(text):
-    if text:
+def extract_price_number(values):
+    prices = []
 
-        match = re.search(r"[\d,]+(?:\.\d+)?", text)
-        if match:
+    for value in values:
+        value = value.strip()
 
-            return match.group(0).replace(",", "")
-    return text
+        if not value or "Ex Tax" in value:
+            continue
+
+        if "EGP" not in value:
+            continue
+
+        value = value.replace("EGP", "").strip()
+        value = value.replace(",", "")
+
+        try:
+            prices.append(float(value))
+        except ValueError:
+            continue
+
+    return prices[0] if prices else None
 
 
 class BadrgrbSpider(scrapy.Spider):

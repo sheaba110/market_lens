@@ -10,16 +10,12 @@ def filter_price(value):
 
 
 def clean_price(value):
-    if value:
-        
-        cleaned = re.sub(r"[^\d.]", "", value)
-        return cleaned
-    return value
+    return value.replace("\xa0", "").replace(".", "").replace(",", ".").strip()
 
 
 class ItemsCrawler(scrapy.Item):
     id = scrapy.Field()
-    
+
     title = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
@@ -36,6 +32,6 @@ class ItemsCrawler(scrapy.Item):
         output_processor=TakeFirst(),
     )
     price = scrapy.Field(
-        input_processor=MapCompose(),
+        input_processor=MapCompose(clean_price),
         output_processor=TakeFirst(),
     )
