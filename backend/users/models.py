@@ -93,6 +93,7 @@ class PriceHistory(models.Model):
         ordering = ['-scraped_at']
         indexes = [
             models.Index(fields=['scraped_at']),
+            models.Index(fields=['item', '-scraped_at']),
         ]
 
     def __str__(self):
@@ -101,7 +102,7 @@ class PriceHistory(models.Model):
     
 class WishList(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    product = models.ManyToManyField(ScrapedItem, blank=True)
+    products = models.ManyToManyField(ScrapedItem, blank=True)
     def __str__(self):
         return f"Wishlist of {self.user.username}"
     

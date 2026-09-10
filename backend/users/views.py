@@ -1,5 +1,5 @@
 from rest_framework import pagination
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, status, filters
 from rest_framework.response import Response
 from .models import ScrapedItem, WishList
@@ -59,13 +59,14 @@ class UserProfileList(generics.ListAPIView):
 
 
 class ItemDetailView(generics.RetrieveAPIView):
+    permission_classes = [AllowAny]
     queryset = ScrapedItem.objects.prefetch_related("price_history").all()
     serializer_class = ScrapedItemSerializer
 
 
 class DashboardProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
-    permission_class = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.all() # type: ignore
     
     def get_object(self):
@@ -95,7 +96,8 @@ class WishListView(generics.RetrieveUpdateAPIView):
         )
 
     def get_object(self):
-        return self.request.user.profile  # type: ignore
+        wishlist, _ = WishList.objects.get_or_create(user=self.request.user)
+        return wishlist
 
 
 class ItemsListView(generics.ListAPIView):

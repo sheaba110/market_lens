@@ -3,6 +3,10 @@ from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 class DashboardConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
+        user = self.scope["user"]
+        if user.is_anonymous or not user.is_staff:
+            await self.close(code=4403)
+            return
         await self.channel_layer.group_add("dashboard_updates", self.channel_name)
         await self.accept()
 

@@ -19,19 +19,25 @@ function formatPrice(price: number, currency?: string) {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const price = product.price ?? 0;
   const hasDiscount =
-    product.originalPrice !== undefined && product.originalPrice > product.price;
+    product.originalPrice !== undefined && product.originalPrice > price;
 
   const discountPercentage = hasDiscount
     ? Math.round(
-        ((product.originalPrice! - product.price) / product.originalPrice!) * 100,
+        ((product.originalPrice! - price) / product.originalPrice!) * 100,
       )
     : null;
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-zinc-200/60 bg-white transition hover:shadow-md">
       <div className="relative aspect-[4/5] overflow-hidden bg-zinc-100">
-        <Link href={`/product/${product.id}`} className="block h-full w-full">
+        <a
+          href={product.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block h-full w-full"
+        >
           <Image
             src={product.image_url || FALLBACK_IMAGE}
             alt={product.title || "Product Image"}
@@ -39,7 +45,7 @@ export function ProductCard({ product }: ProductCardProps) {
             sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-        </Link>
+        </a>
 
         {discountPercentage ? (
           <div className="absolute left-3 top-3 pointer-events-none rounded-full border border-white/50 bg-white/80 px-2.5 py-1 text-[11px] font-medium text-zinc-900 backdrop-blur-md">
@@ -57,7 +63,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </Link>
       </div>
 
-      <Link href={`/product/${product.id}`} className="block">
+      <a href={product.url} target="_blank" rel="noopener noreferrer" className="block">
         <div className="space-y-3 p-4 hover:bg-zinc-50 transition-colors">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
@@ -69,7 +75,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
             <div className="shrink-0 text-right">
               <p className="text-sm font-semibold text-zinc-950">
-                {formatPrice(product.price || 0, product.currency)}
+                {formatPrice(price, product.currency)}
               </p>
 
               {product.originalPrice ? (
@@ -91,7 +97,7 @@ export function ProductCard({ product }: ProductCardProps) {
             ))}
           </div>
         </div>
-      </Link>
+      </a>
     </article>
   );
 }

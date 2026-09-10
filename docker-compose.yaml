@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
     working_dir: /app
-    command: python manage.py runserver 0.0.0.0:8000
+    command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     volumes:
@@ -25,10 +25,13 @@ services:
       - DATABASE_URL=${DATABASE_URL}
       - NEXT_PUBLIC_MEILISEARCH_HOST=${NEXT_PUBLIC_MEILISEARCH_HOST}
       - NEXT_PUBLIC_MEILISEARCH_API_KEY=${NEXT_PUBLIC_MEILISEARCH_API_KEY}
+      - REDIS_HOST=redis
     depends_on:
       database:
         condition: service_healthy
       search_engine:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     networks:
       - market_lens_network
@@ -64,7 +67,7 @@ services:
     ports:
       - "7700:7700"
     environment:
-      - NEXT_PUBLIC_MEILISEARCH_API_KEY=${NEXT_PUBLIC_MEILISEARCH_API_KEY}
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
       - MEILI_ENV=development
     volumes:
       - meili_data:/meili_data
@@ -78,6 +81,18 @@ services:
       - market_lens_network
     restart: on-failure
 
+  redis:
+    image: redis:7-alpine
+    container_name: market_lens_redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    networks:
+      - market_lens_network
+    restart: on-failure
+
   offer_crawler:
     image: market_lens_offer_crawler:latest
     build:
@@ -87,8 +102,8 @@ services:
     env_file:
       - .env
     working_dir: /app
-    # command: sh -c "scrapy crawl hardwaremarket"
-    command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
+    command: sh -c "scrapy crawl hardwaremarket"
+    # command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
@@ -112,8 +127,8 @@ services:
     command: python scripts/indexer.py
     environment:
       - DATABASE_URL=${DATABASE_URL}
-      - NEXT_PUBLIC_MEILISEARCH_HOST=${NEXT_PUBLIC_MEILISEARCH_HOST}
-      - NEXT_PUBLIC_MEILISEARCH_API_KEY=${NEXT_PUBLIC_MEILISEARCH_API_KEY}
+      - MEILI_URL=http://search_engine:7700
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
     volumes:
       - ./backend:/app
     depends_on:
@@ -121,6 +136,8 @@ services:
         condition: service_healthy
       search_engine:
         condition: service_healthy
+      offer_crawler:
+        condition: service_completed_successfully
     networks:
       - market_lens_network
     restart: "no"

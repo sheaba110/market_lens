@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import { useState, useEffect, useMemo, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { searchProducts } from "@/lib/api/products";
@@ -9,9 +8,6 @@ import { useDebounce } from "@/lib/hooks/useDebounce";
 import type { Product } from "@/lib/types/product";
 
 const trendingKeywords = ["PC Components", "Laptops", "Accessories"];
-
-const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=1200&auto=format&fit=crop";
 
 function formatPrice(price: number, currency?: string) {
   const safeCurrency = currency || "EGP";
@@ -122,6 +118,39 @@ export function SearchBar({ onRefine }: SearchBarProps) {
             </kbd>
           </div>
         </div>
+
+        {isFocused && (isLoading || products.length > 0 || visibleKeywords.length > 0) ? (
+          <div className="absolute inset-x-0 top-[calc(100%+0.5rem)] overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl">
+            {isLoading ? <p className="px-3 py-2 text-sm text-zinc-500">Searching…</p> : null}
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                href={product.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsFocused(false)}
+                className="flex items-center justify-between rounded-xl px-3 py-2 text-sm hover:bg-zinc-50"
+              >
+                <span className="line-clamp-1 text-zinc-800">{product.title}</span>
+                <span className="ml-4 shrink-0 font-medium text-zinc-950">
+                  {formatPrice(product.price || 0)}
+                </span>
+              </Link>
+            ))}
+            {!isLoading && products.length === 0
+              ? visibleKeywords.map((keyword) => (
+                <button
+                  key={keyword}
+                  type="button"
+                  onClick={() => handleKeywordClick(keyword)}
+                  className="block w-full rounded-xl px-3 py-2 text-left text-sm text-zinc-600 hover:bg-zinc-50"
+                >
+                  Search for {keyword}
+                </button>
+              ))
+              : null}
+          </div>
+        ) : null}
       </div>
     </>
   );

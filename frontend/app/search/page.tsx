@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import {
   InstantSearch,
   useHits,
@@ -114,13 +114,7 @@ function SearchPageContent() {
   const isLoading = status === "loading" || status === "stalled";
   const nbHits = results?.nbHits || 0;
 
-  // Only show the full skeleton grid on the very first search. After that,
-  // keep the previous hits visible and just dim them — this is what stops
-  // the grid from "blinking" back to skeletons on every refine (typing,
-  // filters, sort, pagination, etc.).
-  const hasLoadedOnce = useRef(false);
-  if (!isLoading) hasLoadedOnce.current = true;
-  const showSkeleton = isLoading && !hasLoadedOnce.current;
+  const showSkeleton = isLoading;
 
   const activeFilterCount = currentRefinements.reduce(
     (acc, curr) => acc + curr.refinements.length,
@@ -164,7 +158,7 @@ function SearchPageContent() {
               </button>
             </div>
             <div className="space-y-7">
-              {/* <FilterPills attribute="vendor" title="Vendor" /> */}
+              <FilterPills attribute="vendor" title="Vendor" />
               <PriceFilter attribute="price" />
             </div>
           </aside>
@@ -190,8 +184,7 @@ function SearchPageContent() {
             </div>
 
             <div
-              className={`grid gap-4 sm:grid-cols-2 xl:grid-cols-3 transition-opacity duration-150 ${isLoading && hasLoadedOnce.current ? "opacity-50" : "opacity-100"
-                }`}
+              className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 transition-opacity duration-150"
             >
               {showSkeleton
                 ? Array.from({ length: 6 }).map((_, index) => (

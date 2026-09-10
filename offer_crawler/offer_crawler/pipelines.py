@@ -1,4 +1,3 @@
-import hashlib
 from decimal import Decimal, InvalidOperation
 
 from asgiref.sync import sync_to_async
@@ -15,11 +14,10 @@ class OfferCrawlerPipeline:
         self,
         adapter: ItemAdapter,
         product_url: str,
-        item_hash: str,
         spider,
     ):
         scraped_items, created = ScrapedItem.objects.update_or_create(
-            id=item_hash,
+            url=product_url,
             defaults={
                 "title": adapter.get("title") or "No Title",
                 "url": product_url,
@@ -45,7 +43,7 @@ class OfferCrawlerPipeline:
         latest_price = (
             PriceHistory.objects
             .filter(item=scraped_items)
-            .order_by("-created_at")
+            .order_by("-scraped_at")
             .first()
         )
 
@@ -62,18 +60,10 @@ class OfferCrawlerPipeline:
         if not product_url:
             raise DropItem(f"Missing URL in item: {item}")
 
-        item_hash = hashlib.md5(
-            product_url.encode("utf-8")
-        ).hexdigest()
-
-        adapter["id"] = item_hash
-
         await self.save_item_to_db(
             adapter,
             product_url,
-            item_hash,
             spider,
         )
 
         return item
-

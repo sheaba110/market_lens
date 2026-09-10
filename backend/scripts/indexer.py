@@ -12,8 +12,8 @@ PG_HOST = os.getenv("DATABASE_HOST")
 PG_PORT = os.getenv("DATABASE_PORT")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-MEILI_URL = os.getenv("MEILI_URL") or os.getenv("NEXT_PUBLIC_MEILI_URL", "http://search_engine:7700")
-MEILI_MASTER_KEY = os.getenv("NEXT_PUBLIC_MEILISEARCH_API_KEY") or os.getenv("NEXT_PUBLIC_MEILI_SEARCH_KEY")
+MEILI_URL = os.getenv("MEILI_URL", "http://search_engine:7700")
+MEILI_MASTER_KEY = os.getenv("MEILI_MASTER_KEY")
 
 
 def get_db_connection():
@@ -39,12 +39,12 @@ def init_meilisearch_index():
     index.update_sortable_attributes(["price"])
 
     print("Meilisearch index settings updated successfully.")
-    return index
+    return client, index
 
 
 def start_indexing(batch_size: int = 1000) -> None:
     db_conn = get_db_connection()
-    meili_index = init_meilisearch_index()
+    meili_client, meili_index = init_meilisearch_index()
 
     try:
         with db_conn.cursor() as cursor:
@@ -89,6 +89,7 @@ def start_indexing(batch_size: int = 1000) -> None:
                     break
 
                 task = meili_index.add_documents(batch_data)
+                meili_client.wait_for_task(task.task_uid)
 
                 duration = time.time() - start_time
                 print(
@@ -99,12 +100,12 @@ def start_indexing(batch_size: int = 1000) -> None:
 
         print("Indexing process completed successfully.")
 
-    except Exception as e:
-        print(f"An error occurred during indexing: {e}")
+    except Exception:
+        print("Indexing failed.")
+        raise
     finally:
         db_conn.close()
 
 
 if __name__ == "__main__":
     start_indexing(batch_size=1000)
-

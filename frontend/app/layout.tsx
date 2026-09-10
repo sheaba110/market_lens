@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google';
 import './globals.css' 
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: "--font-inter",
-})
-
-const geistMono = Inter({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Market Lens",
@@ -25,7 +14,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

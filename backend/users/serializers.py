@@ -33,7 +33,7 @@ class ScrapedItemSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ScrapedItem
-        fields = ['title', 'url', 'vendor', 'image_url', 'current_price']
+        fields = ['id', 'title', 'url', 'vendor', 'image_url', 'current_price']
         
     def get_current_price(self, obj):
         latest_price_obj = obj.price_history.first()

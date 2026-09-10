@@ -37,3 +37,14 @@ Before you begin, ensure you have the following installed:
 - **Meilicsearch** 8.0 or higher
 - **Git**
 - **Docker & Docker Compose** (optional, for containerized deployment)
+
+## Runtime flow
+
+PostgreSQL is the source of truth. A crawl job writes products and price-history
+records, then the indexer runs after that crawl completes and waits for its
+Meilisearch tasks to finish. The frontend searches Meilisearch directly; the
+Django API serves product details and authenticated user data.
+
+For Docker, set the database, Meilisearch master key, and a **search-only**
+Meilisearch API key in `.env` before starting the stack. The master key is
+server-only and must never be assigned to a `NEXT_PUBLIC_*` variable.
