@@ -12,7 +12,7 @@ PG_HOST = os.getenv("DATABASE_HOST")
 PG_PORT = os.getenv("DATABASE_PORT")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-MEILI_URL = os.getenv("MEILI_URL", "http://search_engine:7700")
+MEILI_URL = os.getenv("MEILI_URL", "https://localhost:7700")
 MEILI_MASTER_KEY = os.getenv("MEILI_MASTER_KEY")
 
 

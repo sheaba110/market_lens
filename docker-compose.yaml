@@ -102,7 +102,7 @@ services:
     env_file:
       - .env
     working_dir: /app
-    command: sh -c "scrapy crawl hardwaremarket"
+    # command: sh -c "scrapy crawl hardwaremarket"
     # command: sh -c "scrapy crawl badrgrb && scrapy crawl frensia && scrapy crawl hardwaremarket && scrapy crawl sigma"
     environment:
       - DATABASE_URL=${DATABASE_URL}
@@ -127,7 +127,7 @@ services:
     command: python scripts/indexer.py
     environment:
       - DATABASE_URL=${DATABASE_URL}
-      - MEILI_URL=http://search_engine:7700
+      - MEILI_URL=${MEILI_URL}
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
     volumes:
       - ./backend:/app

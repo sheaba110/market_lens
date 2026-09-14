@@ -32,6 +32,6 @@ class ItemsCrawler(scrapy.Item):
         output_processor=TakeFirst(),
     )
     price = scrapy.Field(
-        input_processor=MapCompose(clean_price),
+        input_processor=MapCompose(),
         output_processor=TakeFirst(),
     )
