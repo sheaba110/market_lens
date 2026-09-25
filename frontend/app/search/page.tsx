@@ -28,20 +28,23 @@ function ConnectedSearchBar() {
 function PriceFilter({ attribute }: { attribute: string }) {
   const { range, start, refine } = useRange({ attribute });
 
-  const min = range.min !== undefined ? range.min : 100;
-  const max = range.max !== undefined ? range.max : 1500;
+  // Keep the slider and its label finite even when the search index reports
+  // an unbounded range (or has no price statistics yet).
+  const min = Number.isFinite(range.min) ? range.min! : 100;
+  const max = Number.isFinite(range.max) && range.max! > min
+    ? range.max!
+    : Math.max(1500, min + 25);
 
-  const committedValue =
-    start[1] !== -Infinity && start[1] !== undefined
-      ? start[1]
+  const upperBound =
+    start[1] !== undefined && Number.isFinite(start[1]) && start[1] !== -500000
+      ? Math.min(max, Math.max(min, start[1]))
       : max;
 
-
-  const [displayValue, setDisplayValue] = useState(committedValue);
+  const [displayValue, setDisplayValue] = useState(upperBound);
 
   useEffect(() => {
-    setDisplayValue(committedValue);
-  }, [committedValue]);
+    setDisplayValue(upperBound);
+  }, [upperBound]);
 
   const debouncedRefine = useDebouncedCallback((value: number) => {
     refine([min, value]);
